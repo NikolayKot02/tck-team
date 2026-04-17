@@ -2,34 +2,17 @@
 <html>
 <head>
     <title>TCK-team</title>
-    <!-- Подключение шрифта -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link href="https://googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     
+    <!-- ПОДКЛЮЧАЕМ ФАЙЛ С ПЕРЕВОДАМИ -->
+    <script src="lang.js"></script>
+
     <style>
-        body {
-            font-family: 'Roboto', sans-serif;
-            padding: 20px;
-            background-color: #f4f4f4; /* Немного фона для стиля */
-        }
-        .lang-switch {
-            margin-bottom: 20px;
-        }
-        .links {
-            margin-top: 20px;
-        }
-        button {
-            cursor: pointer;
-            padding: 8px 20px;
-            font-family: 'Roboto', sans-serif;
-            border: 1px solid #ccc;
-            background: white;
-            border-radius: 5px;
-        }
-        button:hover {
-            background: #eee;
-        }
+        body { font-family: 'Roboto', sans-serif; padding: 20px; }
+        .lang-switch { margin-bottom: 20px; }
+        button { cursor: pointer; padding: 8px 15px; margin-right: 5px; }
     </style>
 </head>
 <body>
@@ -39,48 +22,47 @@
         <button onclick="changeLang('ru')">RU</button>
     </div>
 
-    <h1 id="title">It's website tck-team in cs</h1>
+    <!-- Добавляем data-key, чтобы скрипт знал, какой текст подставлять -->
+    <h1 id="title" data-key="title">It's website tck-team in cs</h1>
+    <p id="description" data-key="description">Welcome to our team page!</p>
     
     <img src="Cs.jpeg" alt="Cs" width="900">
 
     <div class="links">
-        <p id="useful-links">Useful links:</p>
+        <p id="useful-links" data-key="usefulLinks">Useful links:</p>
         <ul>
+            <li><a href="#">Steam</a></li>
         </ul>
+        <p id="team-info" data-key="teamMembers">Team roster...</p>
     </div>
     
     <script>
         function changeLang(lang) {
-            const title = document.getElementById('title');
-            const linksTitle = document.getElementById('useful-links');
+            // Ищем все элементы, у которых есть атрибут data-key
+            const elements = document.querySelectorAll('[data-key]');
+            
+            elements.forEach(el => {
+                const key = el.getAttribute('data-key');
+                if (translations[lang][key]) {
+                    el.textContent = translations[lang][key];
+                }
+            });
 
-            if (lang === 'ru') {
-                title.textContent = "Это сайт tck-team в CS";
-                linksTitle.textContent = "Полезные ссылки:";
-                linksTitle.textContent = "нечего нет";
-                document.documentElement.lang = "ru"; // Меняем атрибут языка в HTML
-            } else {
-                title.textContent = "It's website tck-team in cs";
-                linksTitle.textContent = "Useful links:";
-                document.documentElement.lang = "en";
-            }
+            document.documentElement.lang = lang;
+            localStorage.setItem('preferredLang', lang); // Запоминаем выбор
         }
 
-        // АВТООПРЕДЕЛЕНИЕ ЯЗЫКА
         window.onload = function() {
-            // Получаем код языка браузера (например, "ru-RU" или "en-US")
-            const userLang = navigator.language || navigator.userLanguage; 
+            // Сначала проверяем, сохранял ли пользователь язык раньше
+            let savedLang = localStorage.getItem('preferredLang');
             
-            if (userLang.startsWith('ru')) {
-                changeLang('ru');
-            } else {
-                changeLang('en');
+            if (!savedLang) {
+                // Если нет — определяем по браузерu
+                savedLang = navigator.language.startsWith('ru') ? 'ru' : 'en';
             }
             
-            console.log('Detected language:', userLang);
+            changeLang(savedLang);
         };
-        
-        console.log('Hello from GitHub!');
     </script>
 </body>
 </html>
