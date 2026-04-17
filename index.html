@@ -7,7 +7,7 @@
     <!-- Подключение шрифта -->
     <link rel="preconnect" href="https://googleapis.com">
     <link rel="preconnect" href="https://gstatic.com" crossorigin>
-    <link href="https://googleapis.com/css2?family=Roboto:wght@900&display=swap" rel="stylesheet">
+    <link href="https://googleapis.com" rel="stylesheet">
     
     <!-- Твой файл с переводами -->
     <script src="lang.js"></script>
@@ -76,6 +76,28 @@
             text-shadow: 0 0 30px rgba(0, 255, 0, 0.5); 
         }
 
+        /* Стили для контейнера с гифкой */
+        .gif-container {
+            margin-top: 20px;
+            width: 150px; 
+            height: 150px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: transform 0.3s ease;
+        }
+
+        .gif-container:hover {
+            transform: scale(1.1);
+        }
+
+        .gif-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
         .bottom-nav { 
             display: flex; 
             width: 100%; 
@@ -126,6 +148,16 @@
             <span class="teks1" data-lang="titlePart1">TCK</span>
             <span class="highlight" data-lang="titlePart2">Team</span>
         </h1>
+
+        <!-- Контейнер с гифкой котика -->
+        <div class="gif-container" 
+             onmouseenter="playGif(this)" 
+             onmouseleave="stopGif(this)">
+            <img id="catImg" 
+                 src="https://tenor.com/ru/view/cat-кот-котость-мелстрой-kotost-gif-9396422657313105688" 
+                 data-gif="https://tenor.com/ru/view/cat-кот-котость-мелстрой-kotost-gif-9396422657313105688" 
+                 alt="Cat">
+        </div>
     </div>
 
     <nav class="bottom-nav">
@@ -135,13 +167,31 @@
     </nav>
 
     <script>
+        // Функции для управления котиком
+        function playGif(container) {
+            const img = container.querySelector('img');
+            const gifUrl = img.getAttribute('data-gif');
+            const staticUrl = img.src;
+            if (!img.getAttribute('data-static')) {
+                img.setAttribute('data-static', staticUrl); 
+            }
+            img.src = gifUrl; 
+        }
+
+        function stopGif(container) {
+            const img = container.querySelector('img');
+            const staticUrl = img.getAttribute('data-static');
+            if (staticUrl) {
+                img.src = staticUrl; 
+            }
+        }
+
+        // Переключение языка
         function changeLang(lang) {
             localStorage.setItem('preferredLang', lang);
-            // Если в твоем lang.js есть функция updateLanguage, вызываем её
             if (typeof updateLanguage === 'function') {
                 updateLanguage();
             } else if (typeof translations !== 'undefined') {
-                // Запасной вариант, если функция еще не загрузилась
                 const elements = document.querySelectorAll('[data-lang]');
                 elements.forEach(el => {
                     const key = el.getAttribute('data-lang');
@@ -157,6 +207,11 @@
             let savedLang = localStorage.getItem('preferredLang') || (navigator.language.startsWith('ru') ? 'ru' : 'en');
             changeLang(savedLang);
         };
+
+        // Редирект для мобильных
+        if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+            window.location.href = 'telephone/';
+        }
     </script>
 </body>
 </html>
