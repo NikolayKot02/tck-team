@@ -42,3 +42,35 @@ const translations = {
         ttLabel: "TikTok"
     }
 };
+
+/**
+ * Функция для обновления текстов на странице
+ */
+function updateLanguage() {
+    // Определяем язык: берем из хранилища браузера или ставим английский по умолчанию
+    const lang = localStorage.getItem('preferredLang') || 'en';
+    
+    // Ищем все элементы, у которых есть атрибут data-lang
+    const elements = document.querySelectorAll('[data-lang]');
+    
+    elements.forEach(el => {
+        const key = el.getAttribute('data-lang'); // Получаем ключ, например "sostavTitle"
+        
+        // Если такой ключ есть в нашем объекте перевода — меняем текст
+        if (translations[lang] && translations[lang][key]) {
+            el.innerText = translations[lang][key];
+        }
+    });
+}
+
+/**
+ * Функция для смены языка пользователем (например, через кнопку)
+ * @param {string} newLang - 'ru' или 'en'
+ */
+function setLanguage(newLang) {
+    localStorage.setItem('preferredLang', newLang);
+    updateLanguage();
+}
+
+// Запускаем перевод, когда страница полностью загрузилась
+document.addEventListener('DOMContentLoaded', updateLanguage);
