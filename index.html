@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TCK Team</title>
-    <!-- Подключение шрифта -->
     <link rel="preconnect" href="https://googleapis.com">
     <link rel="preconnect" href="https://gstatic.com" crossorigin>
     <link href="https://googleapis.com" rel="stylesheet">
@@ -14,83 +13,40 @@
     
     <style>
         body, html { 
-            margin: 0; 
-            padding: 0; 
-            height: 100%; 
-            background-color: #000; 
-            color: white; 
+            margin: 0; padding: 0; height: 100%; 
+            background-color: #000; color: white; 
             font-family: 'Roboto', sans-serif; 
-            display: flex; 
-            flex-direction: column; 
-            overflow: hidden; 
-            position: relative;
+            display: flex; flex-direction: column; 
+            overflow: hidden; position: relative;
         }
 
         .bg-image {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0.4;
-            filter: blur(5px);
-            z-index: -1;
-            transform: scale(1.1);
-            pointer-events: none;
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover; opacity: 0.4; filter: blur(5px);
+            z-index: -1; transform: scale(1.1); pointer-events: none;
         }
 
         .content { 
-            flex: 1; 
-            display: flex; 
-            flex-direction: column; 
-            justify-content: center; 
-            align-items: center; 
-            z-index: 1;
+            flex: 1; display: flex; flex-direction: column; 
+            justify-content: center; align-items: center; z-index: 1;
         }
 
-        .glow { 
-            position: absolute; 
-            width: 500px; 
-            height: 500px; 
-            background: radial-gradient(circle, rgba(0,255,0,0.1) 0%, rgba(0,0,0,0) 70%); 
-            z-index: -1; 
-        }
-
-        .main-title { 
-            text-align: center; 
-            text-transform: uppercase; 
-            line-height: 0.85; 
-            user-select: none;
-        }
-
-        .main-title span { 
-            display: block; 
-            font-size: clamp(60px, 15vw, 120px); 
-            letter-spacing: -2px; 
-        }
+        .main-title { text-align: center; text-transform: uppercase; line-height: 0.85; user-select: none; }
+        .main-title span { display: block; font-size: clamp(60px, 15vw, 120px); letter-spacing: -2px; }
 		
 		.teks1 { color: #002aff; }
-        .highlight { 
-            color: #ff0000; 
-            text-shadow: 0 0 30px rgba(0, 255, 0, 0.5); 
-        }
+        .highlight { color: #ff0000; text-shadow: 0 0 30px rgba(0, 255, 0, 0.5); }
 
-        /* Стили для контейнера с гифкой */
+        /* Контейнер для котика */
         .gif-container {
             margin-top: 20px;
             width: 150px; 
             height: 150px;
             cursor: pointer;
-            display: flex;
-            justify-content: center;
-            align-items: center;
             transition: transform 0.3s ease;
         }
 
-        .gif-container:hover {
-            transform: scale(1.1);
-        }
+        .gif-container:hover { transform: scale(1.1); }
 
         .gif-container img {
             width: 100%;
@@ -99,32 +55,19 @@
         }
 
         .bottom-nav { 
-            display: flex; 
-            width: 100%; 
+            display: flex; width: 100%; 
             border-top: 1px solid rgba(255,255,255,0.1); 
             background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(10px);
-            z-index: 2;
+            backdrop-filter: blur(10px); z-index: 2;
         }
 
         .nav-item { 
-            flex: 1; 
-            padding: 30px 0; 
-            text-align: center; 
-            color: #888; 
-            text-transform: uppercase; 
-            font-size: 14px; 
-            letter-spacing: 2px; 
-            border: none;
-            border-right: 1px solid rgba(255,255,255,0.1); 
-            transition: 0.3s; 
-            cursor: pointer; 
-            background: none; 
-            font-family: 'Roboto', sans-serif;
-            font-weight: 700;
+            flex: 1; padding: 30px 0; text-align: center; color: #888; 
+            text-transform: uppercase; font-size: 14px; letter-spacing: 2px; 
+            transition: 0.3s; cursor: pointer; background: none; border: none;
+            font-family: 'Roboto', sans-serif; font-weight: 700;
         }
 
-        .nav-item:last-child { border-right: none; }
         .nav-item:hover { color: #00ff00; background: rgba(0, 255, 0, 0.05); }
 
         .lang-switch { position: absolute; top: 20px; right: 20px; z-index: 10; }
@@ -143,20 +86,16 @@
     </div>
 
     <div class="content">
-        <div class="glow"></div>
         <h1 class="main-title">
             <span class="teks1" data-lang="titlePart1">TCK</span>
             <span class="highlight" data-lang="titlePart2">Team</span>
         </h1>
 
-        <!-- Контейнер с гифкой котика -->
+        <!-- КОТИК: подгружает cat_static.jpg из GitHub, при наведении меняет на GIF -->
         <div class="gif-container" 
-             onmouseenter="playGif(this)" 
-             onmouseleave="stopGif(this)">
-            <img id="catImg" 
-                 src="https://tenor.com/ru/view/cat-кот-котость-мелстрой-kotost-gif-9396422657313105688" 
-                 data-gif="https://tenor.com/ru/view/cat-кот-котость-мелстрой-kotost-gif-9396422657313105688" 
-                 alt="Cat">
+             onmouseenter="this.querySelector('img').src='https://media.tenor.com/gmbMn1iUZxgAAAAi/cat-%D0%BA%D0%BE%D1%82.gif'" 
+             onmouseleave="this.querySelector('img').src='cat_static.png'">
+            <img src="cat_static.png" alt="Cat Sticker">
         </div>
     </div>
 
@@ -167,26 +106,6 @@
     </nav>
 
     <script>
-        // Функции для управления котиком
-        function playGif(container) {
-            const img = container.querySelector('img');
-            const gifUrl = img.getAttribute('data-gif');
-            const staticUrl = img.src;
-            if (!img.getAttribute('data-static')) {
-                img.setAttribute('data-static', staticUrl); 
-            }
-            img.src = gifUrl; 
-        }
-
-        function stopGif(container) {
-            const img = container.querySelector('img');
-            const staticUrl = img.getAttribute('data-static');
-            if (staticUrl) {
-                img.src = staticUrl; 
-            }
-        }
-
-        // Переключение языка
         function changeLang(lang) {
             localStorage.setItem('preferredLang', lang);
             if (typeof updateLanguage === 'function') {
@@ -207,11 +126,6 @@
             let savedLang = localStorage.getItem('preferredLang') || (navigator.language.startsWith('ru') ? 'ru' : 'en');
             changeLang(savedLang);
         };
-
-        // Редирект для мобильных
-        if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
-            window.location.href = 'telephone/';
-        }
     </script>
 </body>
 </html>
