@@ -1,7 +1,7 @@
 const translations = {
     ru: {
-        titlePart1: "GLAD",
-        titlePart2: "KOVKA",
+        titlePart1: "TCK",
+        titlePart2: "Team",
         menuSostav: "Составы",
         menuMatches: "Матчи",
         menuSocial: "Соцсети",
@@ -9,8 +9,8 @@ const translations = {
         sostavTitle: "Состав команды"
     },
     en: {
-        titlePart1: "GLAD",
-        titlePart2: "KOVKA",
+        titlePart1: "TCK",
+        titlePart2: "Team",
         menuSostav: "Rosters",
         menuMatches: "Matches",
         menuSocial: "Social",
