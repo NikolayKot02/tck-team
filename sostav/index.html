@@ -1,174 +1,83 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
+    <meta charset="UTF-8">
     <title>TCK-team | Sostav</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
     <link href="https://googleapis.com" rel="stylesheet">
-    
     <style>
-        body { 
-            font-family: 'Roboto', sans-serif; 
-            padding: 40px; 
-            background-color: #0a0a0a; /* Очень темный фон как на фото */
-            color: white; 
-            margin: 0;
-        }
+        body { font-family: 'Roboto', sans-serif; padding: 40px; background-color: #0a0a0a; color: white; margin: 0; }
+        .sostav-title { font-weight: 900; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 50px; font-size: 48px; text-align: left; color: #ffff00; }
+        .roster-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; max-width: 1200px; margin: 0 auto; }
+        
+        .player-card { background-color: #111; border: 1px solid #333; width: 200px; padding: 10px; text-align: left; transition: 0.3s; cursor: pointer; }
+        .player-card:hover { transform: translateY(-5px); border-color: #00ff00; }
+        .player-photo { width: 100%; height: 250px; background-color: #222; margin-bottom: 15px; overflow: hidden; }
+        .player-photo img { width: 100%; height: 100%; object-fit: cover; }
+        .player-role { font-size: 10px; color: #888; text-transform: uppercase; margin-bottom: 5px; border-left: 2px solid #00ff00; padding-left: 5px; }
+        .player-name2 { font-size: 16px; font-weight: 900; text-transform: uppercase; margin: 5px 0; }
+        .player-country { font-size: 12px; color: #666; text-align: right; margin-top: -20px; }
 
-        .sostav-title {
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 50px;
-            font-size: 36px;
-        }
+        /* Кнопка слева снизу */
+        .back-btn { position: fixed; bottom: 20px; left: 20px; z-index: 1001; color: #555; text-decoration: none; border: 1px solid #333; padding: 10px 30px; border-radius: 2px; text-transform: uppercase; font-size: 14px; transition: 0.3s; background: #0a0a0a; }
+        .back-btn:hover { color: #ffff00; border-color: #ffff00; }
 
-        /* Контейнер для карточек (в ряд) */
-        .roster-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 15px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+        /* Модалка */
+        .modal { display: none; position: fixed; z-index: 999; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); justify-content: center; align-items: center; }
+        .modal-content { background: #111; border: 1px solid #333; max-width: 800px; width: 90%; display: flex; position: relative; }
+        .modal-img-container { width: 40%; }
+        .modal-img-container img { width: 100%; height: 100%; object-fit: cover; }
+        .modal-text-container { width: 60%; padding: 40px; }
+        .close-btn { position: absolute; top: 15px; right: 20px; cursor: pointer; color: #555; font-size: 28px; }
+        .modal-name { color: #ffff00; font-size: 42px; font-weight: 900; margin: 0 0 10px 0; text-transform: uppercase; }
+        .modal-info { color: #ccc; line-height: 1.6; }
 
-        /* Сама карточка игрока */
-        .player-card {
-            background-color: #111; /* Цвет карточки */
-            border: 1px solid #333;
-            width: 200px;
-            padding: 10px;
-            text-align: left;
-            transition: transform 0.3s ease;
+        @media (max-width: 600px) {
+            .modal-content { flex-direction: column; }
+            .modal-img-container, .modal-text-container { width: 100%; }
         }
-
-        .player-card:hover {
-            transform: translateY(-5px);
-            border-color: #00ff00; /* Зеленая подсветка при наведении */
-        }
-
-        /* Заглушка для фото */
-        .player-photo {
-            width: 100%;
-            height: 250px;
-            background-color: #222;
-            margin-bottom: 15px;
-            overflow: hidden;
-        }
-
-        .player-role {
-            font-size: 10px;
-            color: #888;
-            text-transform: uppercase;
-            margin-bottom: 5px;
-            border-left: 2px solid #00ff00;
-            padding-left: 5px;
-        }
-
-        .player-name {
-            font-size: 22px;
-            font-weight: 900;
-            text-transform: uppercase;
-            margin: 5px 0;
-        }
-        .player-name2 {
-            font-size: 16px;
-            font-weight: 900;
-            text-transform: uppercase;
-            margin: 5px 0;
-        }
-
-        .player-country {
-            font-size: 12px;
-            color: #666;
-            text-align: right;
-            margin-top: -20px;
-        }
-
-        .back-btn { 
-            margin-top: 50px; 
-            display: inline-block; 
-            color: #555; 
-            text-decoration: none; 
-            border: 1px solid #333; 
-            padding: 10px 30px; 
-            border-radius: 2px; 
-            text-transform: uppercase;
-            font-size: 14px;
-            transition: 0.3s;
-        }
-        .back-btn:hover { color: white; border-color: white; }
     </style>
 </head>
 <body>
 
-    <h1 class="sostav-title" data-key="sostavTitle">Tck Team</h1>
+    <h1 class="sostav-title" data-lang="sostavTitle">Roster Tck Team</h1>
 
     <div class="roster-container">
-        
-        <!-- Игрок 1 -->
-        <div class="player-card">
-            <div class="player-role">?? / ??</div>
-            <div class="player-photo">
-                <img src="smert_v_loutabe.jpg" alt="Player photo" style="width: 100%; height: 100%; object-fit: cover;">
-            </div>
+        <!-- Игрок 1 (вместо текста передаем ключ 'player_smert_info') -->
+        <div class="player-card" onclick="showInfo('smert_v_loutabe', 'player_smert_info', '../smert_v_loutabe.jpg')">
+            <div class="player-role">??</div>
+            <div class="player-photo"><img src="../smert_v_loutabe.jpg"></div>
             <div class="player-name2">smert_v_loutabe</div>
             <div class="player-country">UA</div>
         </div>
+    </div>
 
-        <!-- Игрок 2 -->
-        <div class="player-card">
-            <div class="player-role">?? / ??</div>
-            <div class="player-photo"></div>
-            <div class="player-name">Player2</div>
-            <div class="player-country">??</div>
+    <div id="infoModal" class="modal" onclick="closeInfo()">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <span class="close-btn" onclick="closeInfo()">&times;</span>
+            <div class="modal-img-container"><img id="modalImg" src=""></div>
+            <div class="modal-text-container">
+                <h2 id="infoName" class="modal-name"></h2>
+                <p id="infoText" class="modal-info"></p>
+            </div>
         </div>
-
-        <!-- Игрок 3 -->
-        <div class="player-card">
-            <div class="player-role">?? / ??</div>
-            <div class="player-photo"></div>
-            <div class="player-name">Player3</div>
-            <div class="player-country">??</div>
-        </div>
-
-        <!-- Игрок 4 -->
-        <div class="player-card">
-            <div class="player-role">?? / ??</div>
-            <div class="player-photo"></div>
-            <div class="player-name">Player4</div>
-            <div class="player-country">??</div>
-        </div>
-
-        <!-- Игрок 5 -->
-        <div class="player-card">
-            <div class="player-role">?? / ??</div>
-            <div class="player-photo"></div>
-            <div class="player-name">Player5</div>
-            <div class="player-country">??</div>
-        </div>
-
     </div>
     
-    <br>
-    <a href="../" class="back-btn" data-key="backBtn">← Back to Main</a>
+    <a href="../" class="back-btn" data-lang="backBtn">← Back to Main</a>
 
+    <script src="lang.js"></script>
     <script>
-        const translations = {
-            ru: { sostavTitle: "Состав Tck Team", backBtn: "← Назад на главную" },
-            en: { sostavTitle: "Roster Tck Team", backBtn: "← Back to Main" }
-        };
-
-        function applyLanguage() {
-            const savedLang = localStorage.getItem('preferredLang') || 'en';
-            const elements = document.querySelectorAll('[data-key]');
-            elements.forEach(el => {
-                const key = el.getAttribute('data-key');
-                if (translations[savedLang][key]) el.textContent = translations[savedLang][key];
-            });
+        function showInfo(name, infoKey, imgPath) {
+            document.getElementById('infoName').innerText = name;
+            // Берем перевод из lang.js
+            document.getElementById('infoText').innerText = typeof getTranslation === "function" ? getTranslation(infoKey) : infoKey;
+            document.getElementById('modalImg').src = imgPath || '';
+            document.getElementById('infoModal').style.display = 'flex';
         }
-        window.onload = applyLanguage;
+
+        function closeInfo() { document.getElementById('infoModal').style.display = 'none'; }
+        window.onkeydown = (e) => { if (e.key === "Escape") closeInfo(); };
     </script>
 </body>
 </html>
