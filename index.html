@@ -10,14 +10,56 @@
     <style>
         body {
             font-family: 'Roboto', sans-serif;
+            padding: 20px;
+        }
+        .lang-switch {
+            margin-bottom: 20px;
+        }
+        .links {
+            margin-top: 20px;
+        }
+        button {
+            cursor: pointer;
+            padding: 5px 15px;
+            font-family: 'Roboto', sans-serif;
         }
     </style>
 </head>
 <body>
-    <h1>It's tck-team in cs</h1>
+
+    <div class="lang-switch">
+        <button onclick="changeLang('en')">EN</button>
+        <button onclick="changeLang('ru')">RU</button>
+    </div>
+
+    <h1 id="title">It's tck-team in cs</h1>
+    
     <img src="Cs.jpeg" alt="Cs" width="900">
+
+    <div class="links">
+        <p id="useful-links">Useful links:</p>
+        <ul>
+            <li><a href="https://steamcommunity.com" target="_blank">Steam Profile</a></li>
+            <li><a href="https://github.com" target="_blank">Our GitHub</a></li>
+        </ul>
+    </div>
     
     <script>
+        function changeLang(lang) {
+            const title = document.getElementById('title');
+            const linksTitle = document.getElementById('useful-links');
+
+            if (lang === 'ru') {
+                title.textContent = "Это команда tck-team в CS";
+                linksTitle.textContent = "Полезные ссылки:";
+                console.log('Язык изменен на Русский');
+            } else {
+                title.textContent = "It's tck-team in cs";
+                linksTitle.textContent = "Useful links:";
+                console.log('Language changed to English');
+            }
+        }
+        
         console.log('Hello from GitHub!');
     </script>
 </body>
