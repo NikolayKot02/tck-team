@@ -1,76 +1,76 @@
 const translations = {
     ru: {
-        // Главная
         titlePart1: "TCK",
         titlePart2: "Team",
         menuSostav: "Составы",
         menuMatches: "Матчи",
         menuSocial: "Соцсети",
-        
-        // Страница состава
         sostavTitle: "Состав команды",
         cap: "(Капитан)",
         backBtn: "← Назад на главную",
-
-        // Страница соцсетей
         followTitle: "ПОДПИСЫВАЙТЕСЬ",
         platformLabel: "Платформа",
         instaLabel: "Инстаграм",
         ytLabel: "Ютуб",
         dsLabel: "Дискорд",
-        ttLabel: "ТикТок"
+        ttLabel: "ТикТок",
+        // Описания игроков
+        player_smert_info: "Один из основателей Tck Team. Профессиональный игрок.",
+        player_2_info: "Информация о втором игроке."
     },
     en: {
-        // Main
         titlePart1: "TCK",
         titlePart2: "Team",
         menuSostav: "Rosters",
         menuMatches: "Matches",
         menuSocial: "Social",
-
-        // Sostav Page
         sostavTitle: "Team Roster",
         cap: "(Captain)",
         backBtn: "← Back to Main",
-
-        // Social Page
         followTitle: "FOLLOW US",
         platformLabel: "Platform",
         instaLabel: "Instagram",
         ytLabel: "YouTube",
         dsLabel: "Discord",
-        ttLabel: "TikTok"
+        ttLabel: "TikTok",
+        // Player descriptions
+        player_smert_info: "One of the founders of Tck Team. Professional player.",
+        player_2_info: "Information about the second player."
+    },
+    ua: {
+        titlePart1: "TCK",
+        titlePart2: "Team",
+        menuSostav: "Склади",
+        menuMatches: "Матчі",
+        menuSocial: "Соцмережі",
+        sostavTitle: "Склад команди",
+        cap: "(Капітан)",
+        backBtn: "← Назад на головну",
+        followTitle: "ПІДПИСУЙТЕСЬ",
+        platformLabel: "Платформа",
+        instaLabel: "Інстаграм",
+        ytLabel: "Ютуб",
+        dsLabel: "Діскорд",
+        ttLabel: "ТікТок",
+        // Описи гравців
+        player_smert_info: "Один із засновників Tck Team. Професійний гравець.",
+        player_2_info: "Інформація про другого гравця."
     }
 };
 
-/**
- * Функция для обновления текстов на странице
- */
-function updateLanguage() {
-    // Определяем язык: берем из хранилища браузера или ставим английский по умолчанию
+function getTranslation(key) {
     const lang = localStorage.getItem('preferredLang') || 'en';
-    
-    // Ищем все элементы, у которых есть атрибут data-lang
-    const elements = document.querySelectorAll('[data-lang]');
-    
-    elements.forEach(el => {
-        const key = el.getAttribute('data-lang'); // Получаем ключ, например "sostavTitle"
-        
-        // Если такой ключ есть в нашем объекте перевода — меняем текст
+    return translations[lang] ? translations[lang][key] || key : key;
+}
+
+function updateLanguage() {
+    const lang = localStorage.getItem('preferredLang') || 'en';
+    document.querySelectorAll('[data-lang]').forEach(el => {
+        const key = el.getAttribute('data-lang');
         if (translations[lang] && translations[lang][key]) {
             el.innerText = translations[lang][key];
         }
     });
 }
 
-/**
- * Функция для смены языка пользователем (например, через кнопку)
- * @param {string} newLang - 'ru' или 'en'
- */
-function setLanguage(newLang) {
-    localStorage.setItem('preferredLang', newLang);
-    updateLanguage();
-}
-
-// Запускаем перевод, когда страница полностью загрузилась
 document.addEventListener('DOMContentLoaded', updateLanguage);
