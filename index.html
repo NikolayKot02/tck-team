@@ -2,132 +2,163 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>TCK Team</title>
-    <!-- Подключение шрифта Roboto -->
-    <link rel="preconnect" href="https://googleapis.com">
-    <link rel="preconnect" href="https://gstatic.com" crossorigin>
-    <link href="https://googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TCK Team | GLADKOVKA</title>
+    <link href="https://googleapis.com" rel="stylesheet">
+    <!-- Твой файл с переводами в GitHub -->
+    <script src="lang.js"></script>
+    
     <style>
-        body {
-            font-family: 'Roboto', sans-serif;
-            padding: 20px;
-            background-color: #f9f9f9;
-            color: #333;
-            line-height: 1.6;
+        body, html { 
+            margin: 0; 
+            padding: 0; 
+            height: 100%; 
+            background-color: #000; 
+            color: white; 
+            font-family: 'Roboto', sans-serif; 
+            display: flex; 
+            flex-direction: column; 
+            overflow: hidden; 
+            position: relative;
         }
-        .lang-switch {
-            margin-bottom: 20px;
+
+        /* ФОН ИЗ ТВОИХ ФАЙЛОВ GITHUB */
+        body::before {
+			content: "";
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			/* Используем твой файл Cs.jpeg из репозитория */
+			background-image: url('Cs.jpeg'); 
+			background-size: cover;
+			background-position: center;
+			opacity: 0.4; /* Прозрачность 40% */
+			z-index: -1;
+		}
+
+
+        .content { 
+            flex: 1; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
+            align-items: center; 
+            z-index: 1;
         }
-        button {
-            cursor: pointer;
-            padding: 8px 15px;
-            font-family: 'Roboto', sans-serif;
-            border: 1px solid #ddd;
-            background: white;
-            border-radius: 4px;
-            transition: 0.3s;
+
+        .glow { 
+            position: absolute; 
+            width: 500px; 
+            height: 500px; 
+            background: radial-gradient(circle, rgba(0,255,0,0.1) 0%, rgba(0,0,0,0) 70%); 
+            z-index: -1; 
         }
-        button:hover {
-            background: #eee;
+
+        .main-title { 
+            text-align: center; 
+            text-transform: uppercase; 
+            line-height: 0.85; 
+            user-select: none;
         }
-        .sostav-btn {
-            display: inline-block;
-            margin-top: 20px;
-            padding: 12px 25px;
-            background-color: #24292e; /* Цвет в стиле GitHub */
-            color: white;
+
+        .main-title span { 
+            display: block; 
+            font-size: clamp(60px, 15vw, 120px); 
+            letter-spacing: -2px; 
+        }
+		
+		.teks1 {
+			color: #002aff;
+		}
+
+        .highlight { 
+            color: #ff0000; 
+            text-shadow: 0 0 30px rgba(0, 255, 0, 0.5); 
+        }
+
+        .bottom-nav { 
+            display: flex; 
+            width: 100%; 
+            border-top: 1px solid rgba(255,255,255,0.1); 
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            z-index: 2;
+        }
+
+        .nav-item { 
+            flex: 1; 
+            padding: 30px 0; 
+            text-align: center; 
+            color: #888; 
+            text-transform: uppercase; 
+            font-size: 14px; 
+            letter-spacing: 2px; 
+            border-right: 1px solid rgba(255,255,255,0.1); 
+            transition: 0.3s; 
+            cursor: pointer; 
+            background: none; 
             border: none;
-            border-radius: 6px;
-            font-weight: bold;
-            text-decoration: none;
-            cursor: pointer;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 700;
         }
-        .sostav-btn:hover {
-            background-color: #444;
+
+        .nav-item:last-child { border-right: none; }
+
+        .nav-item:hover { 
+            color: #00ff00; 
+            background: rgba(0, 255, 0, 0.05); 
         }
-        img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 8px;
-            margin-top: 10px;
-        }
-        .links {
-            margin-top: 25px;
-        }
-        a { color: #0366d6; }
+
+        .lang-switch { position: absolute; top: 20px; right: 20px; z-index: 10; }
+        .lang-btn { background: rgba(0,0,0,0.3); border: 1px solid #444; color: #777; padding: 6px 12px; cursor: pointer; margin-left: 5px; border-radius: 2px; font-size: 12px; transition: 0.3s; }
+        .lang-btn:hover { color: white; border-color: #00ff00; }
     </style>
 </head>
 <body>
 
-    <!-- Кнопки переключения языка -->
     <div class="lang-switch">
-        <button onclick="changeLang('en')">EN</button>
-        <button onclick="changeLang('ru')">RU</button>
+        <button class="lang-btn" onclick="changeLang('en')">EN</button>
+        <button class="lang-btn" onclick="changeLang('ru')">RU</button>
     </div>
 
-    <!-- Основной контент -->
-    <h1 id="title" data-key="title">It's website Tck Team in cs</h1>
-
-    <img src="Cs.jpeg" alt="Cs" width="900">
-
-    <br>
-
-    <!-- КНОПКА СОСТАВА -->
-    <button class="sostav-btn" id="btn-sostav" data-key="btnSostav" onclick="window.location.href='sostav'">
-        View Roster
-    </button>
-
-    <div class="links">
-        <p id="useful-links" data-key="usefulLinks">Useful links:</p>
-        <ul>
-            <li><a href="https://steamcommunity.com" target="_blank">Steam Profile</a></li>
-            <li><a href="https://github.com" target="_blank">Our GitHub</a></li>
-        </ul>
+    <div class="content">
+        <div class="glow"></div>
+        <h1 class="main-title">
+            <span class="teks1" data-key="titlePart1">TCK</span>
+            <span class="highlight" data-key="titlePart2">Team</span>
+        </h1>
     </div>
+
+    <nav class="bottom-nav">
+        <!-- Убедись, что папка sostav с index.html создана -->
+        <button class="nav-item" onclick="window.location.href='sostav/'" data-key="menuSostav">Составы</button>
+        <button class="nav-item" data-key="menuMatches">Матчи</button>
+        <button class="nav-item" data-key="menuSocial">Соцсети</button>
+    </nav>
 
     <script>
-        // Объект с переводами
-        const translations = {
-            ru: {
-                title: "Это сайт Tck Team в CS",
-                usefulLinks: "Полезные ссылки:",
-                btnSostav: "Посмотреть состав"
-            },
-            en: {
-                title: "It's website Tck Team in cs",
-                usefulLinks: "Useful links:",
-                btnSostav: "View Roster"
-            }
-        };
 
         function changeLang(lang) {
-            // Ищем все элементы с атрибутом data-key и меняем им текст
-            const elements = document.querySelectorAll('[data-key]');
-            elements.forEach(el => {
-                const key = el.getAttribute('data-key');
-                if (translations[lang][key]) {
-                    el.textContent = translations[lang][key];
-                }
-            });
-
-            // Сохраняем выбор в браузере и меняем атрибут языка
-            document.documentElement.lang = lang;
-            localStorage.setItem('preferredLang', lang);
+            // Проверка, что файл lang.js загрузился
+            if (typeof translations !== 'undefined') {
+                const elements = document.querySelectorAll('[data-key]');
+                elements.forEach(el => {
+                    const key = el.getAttribute('data-key');
+                    if (translations[lang][key]) {
+                        el.textContent = translations[lang][key];
+                    }
+                });
+                localStorage.setItem('preferredLang', lang);
+                document.documentElement.lang = lang;
+            }
         }
 
-        // АВТООПРЕДЕЛЕНИЕ ПРИ ЗАГРУЗКЕ
         window.onload = function() {
-            let savedLang = localStorage.getItem('preferredLang');
-
-            if (!savedLang) {
-                // Проверка языка браузера
-                savedLang = navigator.language.startsWith('ru') ? 'ru' : 'en';
-            }
-
+            let savedLang = localStorage.getItem('preferredLang') || (navigator.language.startsWith('ru') ? 'ru' : 'en');
             changeLang(savedLang);
-            console.log('Language set to:', savedLang);
         };
     </script>
 </body>
-</html
+</html>
