@@ -11,6 +11,7 @@
         body {
             font-family: 'Roboto', sans-serif;
             padding: 20px;
+            background-color: #f4f4f4; /* Немного фона для стиля */
         }
         .lang-switch {
             margin-bottom: 20px;
@@ -20,8 +21,14 @@
         }
         button {
             cursor: pointer;
-            padding: 5px 15px;
+            padding: 8px 20px;
             font-family: 'Roboto', sans-serif;
+            border: 1px solid #ccc;
+            background: white;
+            border-radius: 5px;
+        }
+        button:hover {
+            background: #eee;
         }
     </style>
 </head>
@@ -32,13 +39,15 @@
         <button onclick="changeLang('ru')">RU</button>
     </div>
 
-    <h1 id="title">It's tck-team in cs</h1>
+    <h1 id="title">It's website tck-team in cs</h1>
     
     <img src="Cs.jpeg" alt="Cs" width="900">
 
     <div class="links">
         <p id="useful-links">Useful links:</p>
         <ul>
+            <li><a href="https://steamcommunity.com" target="_blank">Steam</a></li>
+            <li><a href="https://github.com" target="_blank">GitHub</a></li>
         </ul>
     </div>
     
@@ -50,13 +59,27 @@
             if (lang === 'ru') {
                 title.textContent = "Это сайт tck-team в CS";
                 linksTitle.textContent = "Полезные ссылки:";
-                console.log('Язык изменен на Русский');
+                document.documentElement.lang = "ru"; // Меняем атрибут языка в HTML
             } else {
                 title.textContent = "It's website tck-team in cs";
                 linksTitle.textContent = "Useful links:";
-                console.log('Language changed to English');
+                document.documentElement.lang = "en";
             }
         }
+
+        // АВТООПРЕДЕЛЕНИЕ ЯЗЫКА
+        window.onload = function() {
+            // Получаем код языка браузера (например, "ru-RU" или "en-US")
+            const userLang = navigator.language || navigator.userLanguage; 
+            
+            if (userLang.startsWith('ru')) {
+                changeLang('ru');
+            } else {
+                changeLang('en');
+            }
+            
+            console.log('Detected language:', userLang);
+        };
         
         console.log('Hello from GitHub!');
     </script>
