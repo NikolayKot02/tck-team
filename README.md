@@ -1,2 +1,2 @@
-# tck-team.github.io
+# tck-team
 It's tck team in cs
