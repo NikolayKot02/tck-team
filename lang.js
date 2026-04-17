@@ -1,15 +1,20 @@
 const translations = {
     ru: {
-        title: "Это сайт tck-team в CS",
-        description: "Добро пожаловать на страницу нашей команды!",
-        usefulLinks: "Полезные ссылки:",
-        teamMembers: "Состав команды: Player1, Player2, Player3"
+        titlePart1: "GLAD",
+        titlePart2: "KOVKA",
+        menuSostav: "Составы",
+        menuMatches: "Матчи",
+        menuSocial: "Соцсети",
+        backBtn: "← Назад на главную",
+        sostavTitle: "Состав команды"
     },
     en: {
-        title: "It's website tck-team in cs",
-        description: "Welcome to our team page!",
-        usefulLinks: "Useful links:",
-        teamMembers: "Team roster: Player1, Player2, Player3"
+        titlePart1: "GLAD",
+        titlePart2: "KOVKA",
+        menuSostav: "Rosters",
+        menuMatches: "Matches",
+        menuSocial: "Social",
+        backBtn: "← Back to Main",
+        sostavTitle: "Team Roster"
     }
 };
-
