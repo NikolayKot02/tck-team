@@ -13,7 +13,7 @@
     <style>
         body { font-family: 'Roboto', sans-serif; padding: 40px; background-color: #0a0a0a; color: white; margin: 0; box-sizing: border-box; }
         
-        .sostav-title { font-weight: 900; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 50px; font-size: 48px; text-align: left; color: #FF0000; }
+        .thank-title { font-weight: 900; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 50px; font-size: 48px; text-align: left; color: #FF0000; }
         
         .roster-container { 
             display: flex; 
@@ -24,22 +24,22 @@
             margin: 0 auto; 
         }
         
-        .player-card { background-color: #111; border: 1px solid #333; width: 200px; padding: 10px; text-align: left; transition: 0.3s; cursor: pointer; }
-        .player-card:hover { transform: translateY(-5px); border-color: #FF0000; box-shadow: 0 0 20px rgba(255, 0, 0, 0.6), inset 0 0 10px rgba(255, 0, 0, 0.2); }
-        .player-card:hover .player-name2 { color: #FF0000; }
+        .chell-card { background-color: #111; border: 1px solid #333; width: 200px; padding: 10px; text-align: left; transition: 0.3s; cursor: pointer; }
+        .chell-card:hover { transform: translateY(-5px); border-color: #FF0000; box-shadow: 0 0 20px rgba(255, 0, 0, 0.6), inset 0 0 10px rgba(255, 0, 0, 0.2); }
+        .chell-card:hover .chell-name2 { color: #FF0000; }
 
-        .player-card.blue-hover:hover { border-color: #002aff; box-shadow: 0 0 20px rgba(0, 42, 255, 0.6), inset 0 0 10px rgba(0, 42, 255, 0.2); }
-        .player-card.blue-hover:hover .player-name { color: #002aff; }
+        .chell-card.blue-hover:hover { border-color: #002aff; box-shadow: 0 0 20px rgba(0, 42, 255, 0.6), inset 0 0 10px rgba(0, 42, 255, 0.2); }
+        .chell-card.blue-hover:hover .chell-name { color: #002aff; }
 
-        .player-photo { width: 100%; height: 250px; background-color: #222; margin-bottom: 15px; overflow: hidden; }
-        .player-photo img { width: 100%; height: 100%; object-fit: cover; }
+        .chell-photo { width: 100%; height: 250px; background-color: #222; margin-bottom: 15px; overflow: hidden; }
+        .chell-photo img { width: 100%; height: 100%; object-fit: cover; }
         
-        .player-role { font-size: 10px; color: #888; text-transform: uppercase; margin-bottom: 5px; border-left: 2px solid #ff0000; padding-left: 5px; transition: 0.3s; }
-        .player-role2 { font-size: 10px; color: #888; text-transform: uppercase; margin-bottom: 5px; border-left: 2px solid #002aff; padding-left: 5px; transition: 0.3s; }
+        .chell-role { font-size: 10px; color: #888; text-transform: uppercase; margin-bottom: 5px; border-left: 2px solid #ff0000; padding-left: 5px; transition: 0.3s; }
+        .chell-role2 { font-size: 10px; color: #888; text-transform: uppercase; margin-bottom: 5px; border-left: 2px solid #002aff; padding-left: 5px; transition: 0.3s; }
 
-        .player-name { font-size: 22px; font-weight: 900; text-transform: uppercase; margin: 5px 0; transition: 0.3s; }
-        .player-name2 { font-size: 16px; font-weight: 900; text-transform: uppercase; margin: 5px 0; transition: 0.3s; }
-        .player-country { font-size: 12px; color: #666; text-align: right; margin-top: -20px; }
+        .chell-name { font-size: 22px; font-weight: 900; text-transform: uppercase; margin: 5px 0; transition: 0.3s; }
+        .chell-name2 { font-size: 16px; font-weight: 900; text-transform: uppercase; margin: 5px 0; transition: 0.3s; }
+        .chell-country { font-size: 12px; color: #666; text-align: right; margin-top: -20px; }
 
         /* Кнопка назад */
         .back-btn { position: fixed; bottom: 20px; left: 20px; z-index: 1001; color: #555; text-decoration: none; border: 1px solid #333; padding: 10px 30px; border-radius: 2px; text-transform: uppercase; font-size: 14px; transition: 0.3s; background: #0a0a0a; }
@@ -88,27 +88,27 @@
         }
 
         @media (max-width: 480px) {
-            .player-card { width: 100%; max-width: 280px; } /* Одна карточка в ряд на маленьких телефонах */
+            .chell-card { width: 100%; max-width: 280px; } /* Одна карточка в ряд на маленьких телефонах */
         }
     </style>
 </head>
 <body>
 
-    <h1 class="sostav-title" data-lang="thankTitle">Thank</h1>
+    <h1 class="thank-title" data-lang="thankTitle">Thank</h1>
 
     <div class="roster-container">
-        <div class="player-card" onclick="showInfo('N1kolayKot', 'chell_1_info', '', false)">
-            <div class="player-role">Create website</div>
-            <div class="player-photo"><img src=""></div>
-            <div class="player-name2">N1kolayKot</div>
-            <div class="player-country">UA</div>
+        <div class="chell-card" onclick="showInfo('N1kolayKot', 'chell_1_info', '', false)">
+            <div class="chell-role">Create website</div>
+            <div class="chell-photo"><img src=""></div>
+            <div class="chell-name2">N1kolayKot</div>
+            <div class="chell-country">UA</div>
         </div>
 
-        <div class="player-card blue-hover" onclick="showInfo('s1rota', 'chell_2_info', '', true)">
-            <div class="player-role2">Manager</div>
-            <div class="player-photo"><img src=""></div>
-            <div class="player-name">s1rota</div>
-            <div class="player-country">UA</div>
+        <div class="chell-card blue-hover" onclick="showInfo('s1rota', 'chell_2_info', '', true)">
+            <div class="chell-role2">Manager</div>
+            <div class="chell-photo"><img src=""></div>
+            <div class="chell-name">s1rota</div>
+            <div class="chell-country">UA</div>
         </div>
     </div>
 
