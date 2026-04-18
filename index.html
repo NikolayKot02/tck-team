@@ -23,15 +23,13 @@
             overflow: hidden; position: relative;
         }
 
-        /* ВЕРХНЯЯ ПАНЕЛЬ С КРАСНОЙ ЛИНИЕЙ И ГЛОВ */
+        /* ВЕРХНЯЯ ПАНЕЛЬ */
         .top-bar {
             position: fixed; top: 0; left: 0; width: 100%;
             height: 60px; background: rgba(0, 0, 0, 0.9);
             display: flex; justify-content: space-between; align-items: center;
             padding: 0 40px; box-sizing: border-box;
             z-index: 100;
-            
-            /* Линия и эффект свечения */
             border-bottom: 2px solid #FF0000;
             box-shadow: 0 5px 20px rgba(255, 0, 0, 0.5);
         }
@@ -50,7 +48,6 @@
         .stat-value1 { display: block; font-size: 18px; font-weight: 900; color: #FF0000; line-height: 1; }
         .stat-label { font-size: 8px; color: #666; text-transform: uppercase; letter-spacing: 1px; margin-top: 2px; }
 
-        /* ФОН */
         .bg-image {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             object-fit: cover; opacity: 0.3; filter: blur(5px);
@@ -79,29 +76,52 @@
             font-weight: 900; text-transform: uppercase; z-index: 20; 
         }
 
-        .bottom-nav { display: flex; width: 100%; border-top: 1px solid rgba(255, 255, 255, 0.1); background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(10px); z-index: 20; }
-        .nav-item { flex: 1; padding: 25px 0; text-align: center; color: #888; text-transform: uppercase; font-size: 12px; letter-spacing: 1px; transition: 0.3s; cursor: pointer; background: none; border: none; font-weight: 700; border-right: 1px solid rgba(255,255,255,0.05); }
+        /* НИЖНЯЯ ПАНЕЛЬ */
+        .bottom-nav { 
+            display: flex; width: 100%; 
+            border-top: 1px solid rgba(255, 255, 255, 0.1); 
+            background: rgba(0, 0, 0, 0.8); 
+            backdrop-filter: blur(10px); z-index: 20; 
+        }
+
+        .nav-item { 
+            flex: 1; padding: 25px 0; text-align: center; color: #888; 
+            text-transform: uppercase; font-size: 12px; letter-spacing: 1px; 
+            transition: 0.4s; cursor: pointer; background: none; border: none; 
+            font-weight: 700; border-right: 1px solid rgba(255,255,255,0.05); 
+            position: relative; overflow: hidden; 
+        }
+
         .nav-item:last-child { border-right: none; }
-        .nav-item:hover { color: #ff0000; background: rgba(255, 0, 0, 0.05); }
+
+        /* Линия с гловом */
+        .nav-item::after {
+            content: ''; position: absolute; bottom: 0; left: 50%;
+            width: 0; height: 3px; background: #ff0000;
+            box-shadow: 0 0 15px #ff0000, 0 0 5px #ff0000;
+            transition: 0.4s ease; transform: translateX(-50%);
+        }
+
+        /* ЭФФЕКТ ПРИ НАВЕДЕНИИ: КРАСНЫЙ ТЕКСТ + СВЕЧЕНИЕ ТЕКСТА */
+        .nav-item:hover { 
+            color: #ff0000; 
+            background: rgba(255, 0, 0, 0.05);
+            text-shadow: 0 0 10px #ff0000, 0 0 20px rgba(255, 0, 0, 0.6);
+        }
+
+        .nav-item:hover::after {
+            width: 100%;
+        }
 
         .lang-switch { position: absolute; top: 75px; right: 15px; z-index: 30; display: flex; }
         .lang-btn { background: rgba(0, 0, 0, 0.5); border: 1px solid #444; color: #777; padding: 5px 10px; cursor: pointer; margin-left: 5px; border-radius: 2px; font-size: 11px; }
         .lang-btn:hover { color: #fff; border-color: #ff0000; }
 
-        /* МОБИЛЬНАЯ АДАПТАЦИЯ */
         @media (max-width: 600px) {
             .top-bar { padding: 0 15px; height: 50px; }
-            .top-nickname { font-size: 12px; gap: 8px; }
+            .top-nickname { font-size: 12px; }
             .top-logo { width: 28px; height: 28px; }
-            .top-stats { gap: 12px; }
-            .stat-value, .stat-value1 { font-size: 14px; }
-            .stat-label { font-size: 7px; }
-
-            .lang-switch { top: 60px; right: 10px; }
-            .gif-container { width: 120px; height: 120px; }
-            
-            .nav-item { padding: 20px 0; font-size: 10px; letter-spacing: 0; }
-            .marquee-container { font-size: 12px; padding: 5px 0; }
+            .nav-item { padding: 20px 0; font-size: 10px; }
         }
     </style>
 </head>
@@ -113,18 +133,9 @@
             <div class="top-nickname">TCK Team</div>
         </div>
         <div class="top-stats">
-            <div class="stat-item">
-                <span class="stat-value">?</span>
-                <span class="stat-label" data-lang="statWins">Wins</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-value1">?</span>
-                <span class="stat-label" data-lang="statLosses">Losses</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-value">?</span>
-                <span class="stat-label" data-lang="statMatches">Matches</span>
-            </div>
+            <div class="stat-item"><span class="stat-value">?</span><span class="stat-label" data-lang="statWins">Wins</span></div>
+            <div class="stat-item"><span class="stat-value1">?</span><span class="stat-label" data-lang="statLosses">Losses</span></div>
+            <div class="stat-item"><span class="stat-value">?</span><span class="stat-label" data-lang="statMatches">Matches</span></div>
         </div>
     </div>
 
