@@ -10,6 +10,7 @@
 
     <link rel="preconnect" href="https://googleapis.com">
     <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link href="https://googleapis.com" rel="stylesheet">
     
     <script src="lang.js"></script>
     
@@ -28,38 +29,25 @@
             height: 60px; background: rgba(0, 0, 0, 0.9);
             display: flex; justify-content: space-between; align-items: center;
             padding: 0 40px; box-sizing: border-box;
-            border-bottom: 1px solid rgba(255, 0, 0, 0.2); /* Красная линия */
+            border-bottom: 1px solid rgba(255, 0, 0, 0.2);
             z-index: 100;
         }
 
         .top-left { display: flex; align-items: center; gap: 15px; }
-        
-        /* ЛОГОТИП В ПАНЕЛИ */
         .top-logo { 
-            width: 35px; height: 35px; 
-            border-radius: 50%; 
-            border: 1px solid #FF0000; 
-            box-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
-            overflow: hidden; /* Чтобы картинка не вылезала за кружок */
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            width: 35px; height: 35px; border-radius: 50%; border: 1px solid #FF0000; 
+            box-shadow: 0 0 10px rgba(255, 0, 0, 0.3); overflow: hidden; display: flex; justify-content: center; align-items: center;
         }
-        .top-logo img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
+        .top-logo img { width: 100%; height: 100%; object-fit: cover; }
         .top-nickname { font-weight: 900; color: #0000FF; letter-spacing: 1px; text-transform: uppercase; font-size: 16px; }
 
-        .top-stats { display: flex; gap: 30px; }
+        .top-stats { display: flex; gap: 20px; }
         .stat-item { text-align: center; }
         .stat-value { display: block; font-size: 18px; font-weight: 900; color: #0000FF; line-height: 1; }
         .stat-value1 { display: block; font-size: 18px; font-weight: 900; color: #FF0000; line-height: 1; }
         .stat-label { font-size: 8px; color: #666; text-transform: uppercase; letter-spacing: 1px; margin-top: 2px; }
 
-        /* ОСТАЛЬНОЙ ДИЗАЙН */
+        /* ФОН */
         .bg-image {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             object-fit: cover; opacity: 0.3; filter: blur(5px);
@@ -73,51 +61,57 @@
         }
 
         .main-title { text-align: center; text-transform: uppercase; line-height: 0.85; user-select: none; }
-        .main-title span { display: block; font-size: clamp(60px, 15vw, 120px); letter-spacing: -2px; }
+        .main-title span { display: block; font-size: clamp(50px, 12vw, 120px); letter-spacing: -2px; }
 		
 		.teks1 { color: #002aff; }
         .highlight { color: #ff0000; text-shadow: 0 0 30px rgba(255, 0, 0, 0.5); }
 
         .gif-container { margin-top: 20px; width: 150px; height: 150px; cursor: pointer; transition: 0.3s; }
-        .gif-container:hover { transform: scale(1.1); }
         .gif-container img { width: 100%; height: 100%; object-fit: contain; }
 
         .marquee-container { 
-            width: 100%; 
-            background: rgba(255, 0, 0, 0.1); 
+            width: 100%; background: rgba(255, 0, 0, 0.1); 
             border-top: 1px solid rgba(255, 0, 0, 0.3); 
-            color: #ff0000; 
-            padding: 8px 0; 
-            font-size: 15px; 
-			opacity: 0.7;
-            font-weight: 900;
-            text-transform: uppercase; 
-            z-index: 20; 
+            color: #ff0000; padding: 8px 0; font-size: 14px; 
+            font-weight: 900; text-transform: uppercase; z-index: 20; 
         }
 
         .bottom-nav { display: flex; width: 100%; border-top: 1px solid rgba(255, 255, 255, 0.1); background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(10px); z-index: 20; }
-        .nav-item { flex: 1; padding: 30px 0; text-align: center; color: #888; text-transform: uppercase; font-size: 14px; letter-spacing: 2px; transition: 0.3s; cursor: pointer; background: none; border: none; font-weight: 700; }
+        .nav-item { flex: 1; padding: 25px 0; text-align: center; color: #888; text-transform: uppercase; font-size: 12px; letter-spacing: 1px; transition: 0.3s; cursor: pointer; background: none; border: none; font-weight: 700; border-right: 1px solid rgba(255,255,255,0.05); }
+        .nav-item:last-child { border-right: none; }
         .nav-item:hover { color: #ff0000; background: rgba(255, 0, 0, 0.05); }
 
-        .lang-switch { position: absolute; top: 80px; right: 20px; z-index: 30; }
-        .lang-btn { background: rgba(0, 0, 0, 0.5); border: 1px solid #444; color: #777; padding: 6px 12px; cursor: pointer; margin-left: 5px; border-radius: 2px; font-size: 12px; transition: 0.3s; }
+        .lang-switch { position: absolute; top: 75px; right: 15px; z-index: 30; display: flex; }
+        .lang-btn { background: rgba(0, 0, 0, 0.5); border: 1px solid #444; color: #777; padding: 5px 10px; cursor: pointer; margin-left: 5px; border-radius: 2px; font-size: 11px; }
         .lang-btn:hover { color: #fff; border-color: #ff0000; }
+
+        /* МОБИЛЬНАЯ АДАПТАЦИЯ */
+        @media (max-width: 600px) {
+            .top-bar { padding: 0 15px; height: 50px; }
+            .top-nickname { font-size: 12px; gap: 8px; }
+            .top-logo { width: 28px; height: 28px; }
+            .top-stats { gap: 12px; }
+            .stat-value, .stat-value1 { font-size: 14px; }
+            .stat-label { font-size: 7px; }
+
+            .lang-switch { top: 60px; right: 10px; }
+            .gif-container { width: 120px; height: 120px; }
+            
+            .nav-item { padding: 20px 0; font-size: 10px; letter-spacing: 0; }
+            .marquee-container { font-size: 12px; padding: 5px 0; }
+        }
     </style>
 </head>
 <body>
 
-    <!-- ВЕРХНЯЯ ПАНЕЛЬ -->
     <div class="top-bar">
         <div class="top-left">
-            <!-- Логотип теперь корректно отображается в круге -->
-            <div class="top-logo">
-                <img src="Logo_TCK.png" alt="Logo">
-            </div> 
+            <div class="top-logo"><img src="Logo_TCK.png" alt="Logo"></div> 
             <div class="top-nickname">TCK Team</div>
         </div>
         <div class="top-stats">
             <div class="stat-item">
-                <span class="stat-value">?</span> <!-- Можно заменить на свои числа -->
+                <span class="stat-value">?</span>
                 <span class="stat-label" data-lang="statWins">Wins</span>
             </div>
             <div class="stat-item">
@@ -150,7 +144,7 @@
     </div>
 
     <div class="marquee-container">
-        <marquee scrollamount="30" data-lang="runningText">Loading information...</marquee>
+        <marquee scrollamount="10" data-lang="runningText">Loading information...</marquee>
     </div>
 
     <nav class="bottom-nav">
