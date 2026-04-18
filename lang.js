@@ -31,6 +31,9 @@ const translations = {
         // Описания игроков
         player_smert_info: "Один из основателей Tck Team. Профессиональный игрок.",
         player_2_info: "Брат основателя. Скиловый игрок."
+        chell_2_info:"Тоже создать TCK Team. Гл. менеджер"
+        chell_1_info:"Сделал сайт и играет в кс."
+        thankTitle:"Спасибо"
     },
     en: {
         titlePart1: "TCK",
@@ -58,6 +61,9 @@ const translations = {
 
         player_smert_info: "One of the founders of Tck Team. Professional player.",
         player_2_info: "The founder's brother. A skilled player."
+        chell_1_info:"Made a website and plays CS 2."
+        chell_2_info:"Also create a TCK Team. Head Manager."
+        thankTitle:"Thank"
     },
     ua: {
         titlePart1: "TCK",
@@ -85,6 +91,9 @@ const translations = {
 
         player_smert_info: "Один із засновників Tck Team. Професійний гравець.",
         player_2_info: "Брат засновника. Скиловий гравець."
+        chell_1_info:"Зробив сайт та грає в кс 2."
+        chell_2_info:"Теж створити TCK Team. Гол. менеджер."
+        thankTitle:"Дякую"
     }
 };
 
