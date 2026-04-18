@@ -27,7 +27,8 @@ const translations = {
         chell_2_info: "Тоже создатель TCK Team. Гл. менеджер.",
         chell_3_info:"Моральная поддержка. Идеи для сайта.",
         menuthank:"Спасибо за помощь",
-        watchYT:"Смотрите на YouTube"
+        watchYT:"Смотрите на YouTube",
+        minitext:"Этот спорт был создан в 2026 году."
     },
     en: {
         titlePart1: "TCK",
@@ -57,7 +58,8 @@ const translations = {
         chell_2_info: "Also the creator of TCK Team. Chief manager.",
         chell_3_info:"Moral support. Website ideas.",
         menuthank:"Thanks for help",
-        watchYT:"Watch on YouTube"
+        watchYT:"Watch on YouTube",
+        minitext:"This sport was created in 2026."
     },
     ua: {
         titlePart1: "TCK",
@@ -87,7 +89,8 @@ const translations = {
         chell_2_info: "Теж творець TCK Team. Гол. менеджер.",
         chell_3_info:"Моральна підтримка. Ідеї ​​для сайту.",
         menuthank:"Дякую за допомогу",
-        watchYT:"Дивитися на YouTube"
+        watchYT:"Дивитися на YouTube",
+        minitext:"Цей спорт був створений у 2026 році."
     }
 };
 
