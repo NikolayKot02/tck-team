@@ -7,7 +7,7 @@
     <link rel="icon" type="image/png" href="../Logo_TCK.png">
     <link rel="preconnect" href="https://googleapis.com">
     <link rel="preconnect" href="https://gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;900&display=swap" rel="stylesheet">
+    <link href="https://googleapis.com" rel="stylesheet">
     
     <script src="../lang.js"></script>
 
@@ -17,95 +17,88 @@
         .header { color: #FF0000; font-size: 36px; text-transform: uppercase; font-weight: 900; margin-bottom: 40px; }
 
         .match-list { display: flex; flex-direction: column; width: 100%; }
+        
         .match-item { 
             display: flex; justify-content: space-between; align-items: center; 
-            padding: 20px 15px; border-bottom: 1px solid #111; 
+            padding: 25px 15px; border-bottom: 1px solid #111; 
             cursor: pointer; transition: 0.3s; 
+            position: relative; 
+            overflow: hidden;
         }
 
-        .win { color: #00ff00; }
-        .lose { color: #ff0000; }
-        .draw { color: #ffff00; }
+        /* ЛИНИЯ ИЗ СЕРЕДИНЫ */
+        .match-item::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 3px;
+            transition: all 0.4s ease-in-out;
+            transform: translateX(-50%);
+            z-index: 2;
+        }
+
+        .match-item:hover::after { width: 100%; }
+
+        /* ЦВЕТА ЦИФР (ФИКСИРОВАННЫЕ) */
+        .win { color: #00ff00 !important; }
+        .lose { color: #ff0000 !important; }
+        .draw { color: #ffff00 !important; }
 
         .match-item:hover { background: rgba(255, 255, 255, 0.03); }
-        .match-item:has(.win):hover { border-color: #00ff00; box-shadow: inset 0 0 15px rgba(0, 255, 0, 0.1); }
-        .match-item:has(.lose):hover { border-color: #ff0000; box-shadow: inset 0 0 15px rgba(255, 0, 0, 0.1); }
-        .match-item:has(.draw):hover { border-color: #ffff00; box-shadow: inset 0 0 15px rgba(255, 255, 0, 0.1); }
 
-        .teams-box { display: flex; align-items: center; }
+        /* ЭФФЕКТЫ ЛИНИИ ПРИ НАВЕДЕНИИ */
+        .match-item:has(.win):hover::after { background: #00ff00; box-shadow: 0 0 15px #00ff00; }
+        .match-item:has(.lose):hover::after { background: #ff0000; box-shadow: 0 0 15px #ff0000; }
+        .match-item:has(.draw):hover::after { background: #ffff00; box-shadow: 0 0 15px #ffff00; }
+
+        .teams-box { display: flex; align-items: center; z-index: 3; }
         .our-team { font-weight: 900; color: #ffffff; font-size: 18px; text-transform: uppercase; }
         .vs { width: 40px; text-align: center; font-size: 11px; color: #444; text-transform: lowercase; }
         .enemy-team { font-weight: 900; color: #666; font-size: 18px; text-transform: uppercase; }
-        .score { font-size: 20px; font-weight: 900; letter-spacing: 1px; text-align: right; padding-right: 10px; }
+        .score { font-size: 20px; font-weight: 900; letter-spacing: 1px; text-align: right; padding-right: 10px; z-index: 3; }
 
         /* МОДАЛЬНОЕ ОКНО */
-        .modal { 
-            display: none; position: fixed; z-index: 999; top: 0; left: 0; 
-            width: 100%; height: 100%; background: rgba(0,0,0,0); 
-            justify-content: center; align-items: center; transition: 0.4s ease;
-        }
+        .modal { display: none; position: fixed; z-index: 999; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0); justify-content: center; align-items: center; transition: 0.4s ease; }
         .modal.active { background: rgba(0,0,0,0.9); }
-
         .modal-content { 
-            background: #111; border: 1px solid #333;
-            max-width: 500px; width: 90%; padding: 40px; text-align: center; position: relative;
-            transform: translateY(-100vh); transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.1); 
+            background: #111; border: 2px solid #333; 
+            max-width: 500px; width: 90%; padding: 40px; 
+            text-align: center; position: relative; 
+            transform: translateY(-100vh); 
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.1); 
         }
-
-        .modal.is-win .modal-content { border-color: #00ff00; box-shadow: 0 0 30px rgba(0, 255, 0, 0.3); }
-        .modal.is-win .rounds-info { color: #00ff00; }
-        .modal.is-lose .modal-content { border-color: #ff0000; box-shadow: 0 0 30px rgba(255, 0, 0, 0.3); }
-        .modal.is-lose .rounds-info { color: #ff0000; }
-        .modal.is-draw .modal-content { border-color: #ffff00; box-shadow: 0 0 30px rgba(255, 255, 0, 0.3); }
-        .modal.is-draw .rounds-info { color: #ffff00; }
-
         .modal.active .modal-content { transform: translateY(0); }
-        .modal.closing .modal-content { transform: translateY(100vh); }
 
-        .modal-header-text { font-size: 14px; color: #555; text-transform: uppercase; margin-bottom: 5px; }
-        .modal-title { font-size: 28px; font-weight: 900; margin-bottom: 20px; text-transform: uppercase; color: #fff; }
-        .rounds-info { font-size: 54px; font-weight: 900; margin: 15px 0; letter-spacing: 5px; }
-        
-        .yt-link {
-            display: inline-block; margin-top: 25px; padding: 12px 25px; 
-            background: #FF0000; color: #fff; text-decoration: none; 
-            font-weight: 900; text-transform: uppercase; font-size: 12px;
-            border-radius: 2px; transition: 0.3s;
-        }
+        /* СВЕЧЕНИЕ (GLOW) В МОДАЛКЕ ПО РЕЗУЛЬТАТУ */
+        .modal.is-win .modal-content { border-color: #00ff00; box-shadow: 0 0 40px rgba(0, 255, 0, 0.4); }
+        .modal.is-win #mRounds { color: #00ff00; text-shadow: 0 0 20px #00ff00, 0 0 40px rgba(0, 255, 0, 0.5); }
+
+        .modal.is-lose .modal-content { border-color: #ff0000; box-shadow: 0 0 40px rgba(255, 0, 0, 0.4); }
+        .modal.is-lose #mRounds { color: #ff0000; text-shadow: 0 0 20px #ff0000, 0 0 40px rgba(255, 0, 0, 0.5); }
+
+        .modal.is-draw .modal-content { border-color: #ffff00; box-shadow: 0 0 40px rgba(255, 255, 0, 0.4); }
+        .modal.is-draw #mRounds { color: #ffff00; text-shadow: 0 0 20px #ffff00, 0 0 40px rgba(255, 255, 0, 0.5); }
+
+        .rounds-info { font-size: 54px; font-weight: 900; margin: 15px 0; letter-spacing: 5px; transition: 0.3s; }
+        .yt-link { display: inline-block; margin-top: 25px; padding: 12px 25px; background: #FF0000; color: #fff; text-decoration: none; font-weight: 900; text-transform: uppercase; font-size: 12px; border-radius: 2px; transition: 0.3s; }
         .yt-link:hover { background: #fff; color: #000; }
-
         .close-btn { position: absolute; top: 15px; right: 20px; cursor: pointer; color: #555; font-size: 28px; }
         
-        /* Кнопка назад */
-        .back-btn { 
-            position: fixed; bottom: 20px; left: 20px; z-index: 1001; 
-            color: #555; text-decoration: none; border: 1px solid #333; 
-            padding: 10px 30px; border-radius: 2px; text-transform: uppercase; 
-            font-size: 11px; background: #000; transition: 0.3s; 
-        }
+        .back-btn { position: fixed; bottom: 20px; left: 20px; z-index: 1001; color: #555; text-decoration: none; border: 1px solid #333; padding: 10px 30px; border-radius: 2px; text-transform: uppercase; font-size: 11px; background: #000; transition: 0.3s; }
         .back-btn:hover { color: #FF0000; border-color: #FF0000; }
 
-        /* АДАПТАЦИЯ ДЛЯ ТЕЛЕФОНОВ */
+        /* МОБИЛЬНАЯ ВЕРСИЯ */
         @media (max-width: 768px) {
-            body { padding: 20px; padding-bottom: 80px; }
-            .header { font-size: 28px; text-align: center; margin-bottom: 25px; }
-            
+            body { padding: 20px; padding-top: 30px; padding-bottom: 100px; }
+            .header { font-size: 26px; text-align: center; }
+            .match-item { padding: 20px 10px; }
             .our-team, .enemy-team { font-size: 14px; }
             .score { font-size: 16px; }
-            .vs { width: 30px; font-size: 10px; }
-            
-            .match-item { padding: 15px 10px; }
-
-            .modal-content { padding: 30px 20px; }
-            .modal-title { font-size: 22px; }
-            .rounds-info { font-size: 40px; }
-
-            .back-btn { 
-                left: 10px; right: 10px; bottom: 10px; 
-                text-align: center; padding: 15px; 
-                background: rgba(10, 10, 10, 0.95);
-                border-color: #444;
-            }
+            .modal-content { width: 85%; padding: 30px 15px; }
+            .rounds-info { font-size: 42px; }
+            .back-btn { left: 10px; right: 10px; bottom: 10px; text-align: center; padding: 18px; font-size: 13px; }
         }
     </style>
 </head>
@@ -139,8 +132,7 @@
     <div id="matchModal" class="modal" onclick="closeMatch()">
         <div class="modal-content" onclick="event.stopPropagation()">
             <span class="close-btn" onclick="closeMatch()">&times;</span>
-            <div class="modal-header-text" data-lang="matchDetails">Match Details</div>
-            <div class="modal-title" id="mOpponent">TEAM</div>
+            <div id="mOpponent" style="font-size: 26px; font-weight: 900; text-transform: uppercase; color: white;">TEAM</div>
             <div class="rounds-info" id="mRounds">0:0</div>
             <a href="#" id="mYoutube" target="_blank" class="yt-link" data-lang="watchYT">Watch on YouTube</a>
         </div>
@@ -151,40 +143,34 @@
     <script>
         function openMatch(element, opponent, ytLink) {
             const modal = document.getElementById('matchModal');
-            const scoreText = element.querySelector('.score').innerText;
-            const scoreClass = element.querySelector('.score').classList;
+            const scoreElement = element.querySelector('.score');
+            const scoreText = scoreElement.innerText;
 
             document.getElementById('mOpponent').innerText = opponent;
             document.getElementById('mRounds').innerText = scoreText;
             document.getElementById('mYoutube').href = ytLink;
 
+            // Сбрасываем старые классы свечения
             modal.classList.remove('is-win', 'is-lose', 'is-draw');
 
-            if (scoreClass.contains('win')) modal.classList.add('is-win');
-            if (scoreClass.contains('lose')) modal.classList.add('is-lose');
-            if (scoreClass.contains('draw')) modal.classList.add('is-draw');
+            // Добавляем нужный класс в зависимости от цвета цифр
+            if (scoreElement.classList.contains('win')) modal.classList.add('is-win');
+            if (scoreElement.classList.contains('lose')) modal.classList.add('is-lose');
+            if (scoreElement.classList.contains('draw')) modal.classList.add('is-draw');
 
             modal.style.display = 'flex';
-            if (typeof updateLanguage === 'function') updateLanguage();
-            
             setTimeout(() => { modal.classList.add('active'); }, 10);
         }
 
         function closeMatch() {
             const modal = document.getElementById('matchModal');
             modal.classList.remove('active');
-            modal.classList.add('closing');
-            setTimeout(() => {
-                modal.style.display = 'none';
-                modal.classList.remove('closing');
-            }, 500);
+            setTimeout(() => { modal.style.display = 'none'; }, 500);
         }
 
         window.onload = function() {
             if (typeof updateLanguage === 'function') updateLanguage();
         };
-
-        window.onkeydown = (e) => { if (e.key === "Escape") closeMatch(); };
     </script>
 </body>
 </html>
