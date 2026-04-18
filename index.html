@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TCK Team</title>
+
+    <!-- ИКОНКА НА ВКЛАДКЕ БРАУЗЕРА -->
+    <link rel="icon" type="image/png" href="Logo_TCK.png">
+
     <link rel="preconnect" href="https://googleapis.com">
     <link rel="preconnect" href="https://gstatic.com" crossorigin>
     <link href="https://googleapis.com" rel="stylesheet">
@@ -13,38 +17,60 @@
     <style>
         body, html { 
             margin: 0; padding: 0; height: 100%; 
-            background-color: #000; 
-            color: white; 
+            background-color: #000; color: white; 
             font-family: 'Roboto', sans-serif; 
             display: flex; flex-direction: column; 
             overflow: hidden; position: relative;
         }
 
-        .bg-image {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            object-fit: cover; 
-            opacity: 0.3; 
-            filter: blur(5px);
-            z-index: 1; 
-            transform: scale(1.1); 
-            pointer-events: none;
+        /* ВЕРХНЯЯ ПАНЕЛЬ */
+        .top-bar {
+            position: fixed; top: 0; left: 0; width: 100%;
+            height: 60px; background: rgba(0, 0, 0, 0.9);
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 0 40px; box-sizing: border-box;
+            border-bottom: 1px solid rgba(255, 0, 0, 0.2); /* Красная линия */
+            z-index: 100;
         }
 
-        /* КРАСНОЕ СВЕЧЕНИЕ ЦЕНТРА */
-        .glow { 
-            position: absolute; 
-            width: 600px; 
-            height: 600px; 
-            background: radial-gradient(circle, rgba(255, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0) 70%); 
-            z-index: 5; 
-            pointer-events: none;
+        .top-left { display: flex; align-items: center; gap: 15px; }
+        
+        /* ЛОГОТИП В ПАНЕЛИ */
+        .top-logo { 
+            width: 35px; height: 35px; 
+            border-radius: 50%; 
+            border: 1px solid #FF0000; 
+            box-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
+            overflow: hidden; /* Чтобы картинка не вылезала за кружок */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .top-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .top-nickname { font-weight: 900; color: #0000FF; letter-spacing: 1px; text-transform: uppercase; font-size: 16px; }
+
+        .top-stats { display: flex; gap: 30px; }
+        .stat-item { text-align: center; }
+        .stat-value { display: block; font-size: 18px; font-weight: 900; color: #0000FF; line-height: 1; }
+        .stat-value1 { display: block; font-size: 18px; font-weight: 900; color: #FF0000; line-height: 1; }
+        .stat-label { font-size: 8px; color: #666; text-transform: uppercase; letter-spacing: 1px; margin-top: 2px; }
+
+        /* ОСТАЛЬНОЙ ДИЗАЙН */
+        .bg-image {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover; opacity: 0.3; filter: blur(5px);
+            z-index: 1; transform: scale(1.1); pointer-events: none;
         }
 
         .content { 
             flex: 1; display: flex; flex-direction: column; 
             justify-content: center; align-items: center; 
-            z-index: 10; 
-            position: relative;
+            z-index: 10; position: relative;
         }
 
         .main-title { text-align: center; text-transform: uppercase; line-height: 0.85; user-select: none; }
@@ -53,36 +79,58 @@
 		.teks1 { color: #002aff; }
         .highlight { color: #ff0000; text-shadow: 0 0 30px rgba(255, 0, 0, 0.5); }
 
-        .gif-container {
-            margin-top: 20px;
-            width: 150px; height: 150px;
-            cursor: pointer; transition: transform 0.3s ease;
-        }
+        .gif-container { margin-top: 20px; width: 150px; height: 150px; cursor: pointer; transition: 0.3s; }
         .gif-container:hover { transform: scale(1.1); }
         .gif-container img { width: 100%; height: 100%; object-fit: contain; }
 
-        .bottom-nav { 
-            display: flex; width: 100%; 
-            border-top: 1px solid rgba(255, 255, 255, 0.1); 
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(10px); 
+        .marquee-container { 
+            width: 100%; 
+            background: rgba(255, 0, 0, 0.1); 
+            border-top: 1px solid rgba(255, 0, 0, 0.3); 
+            color: #ff0000; 
+            padding: 8px 0; 
+            font-size: 15px; 
+			opacity: 0.7;
+            font-weight: 900;
+            text-transform: uppercase; 
             z-index: 20; 
         }
 
-        .nav-item { 
-            flex: 1; padding: 30px 0; text-align: center; color: #888; 
-            text-transform: uppercase; font-size: 14px; letter-spacing: 2px; 
-            transition: 0.3s; cursor: pointer; background: none; border: none;
-            font-family: 'Roboto', sans-serif; font-weight: 700;
-        }
+        .bottom-nav { display: flex; width: 100%; border-top: 1px solid rgba(255, 255, 255, 0.1); background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(10px); z-index: 20; }
+        .nav-item { flex: 1; padding: 30px 0; text-align: center; color: #888; text-transform: uppercase; font-size: 14px; letter-spacing: 2px; transition: 0.3s; cursor: pointer; background: none; border: none; font-weight: 700; }
         .nav-item:hover { color: #ff0000; background: rgba(255, 0, 0, 0.05); }
 
-        .lang-switch { position: absolute; top: 20px; right: 20px; z-index: 30; }
+        .lang-switch { position: absolute; top: 80px; right: 20px; z-index: 30; }
         .lang-btn { background: rgba(0, 0, 0, 0.5); border: 1px solid #444; color: #777; padding: 6px 12px; cursor: pointer; margin-left: 5px; border-radius: 2px; font-size: 12px; transition: 0.3s; }
         .lang-btn:hover { color: #fff; border-color: #ff0000; }
     </style>
 </head>
 <body>
+
+    <!-- ВЕРХНЯЯ ПАНЕЛЬ -->
+    <div class="top-bar">
+        <div class="top-left">
+            <!-- Логотип теперь корректно отображается в круге -->
+            <div class="top-logo">
+                <img src="Logo_TCK.png" alt="Logo">
+            </div> 
+            <div class="top-nickname">TCK Team</div>
+        </div>
+        <div class="top-stats">
+            <div class="stat-item">
+                <span class="stat-value">?</span> <!-- Можно заменить на свои числа -->
+                <span class="stat-label" data-lang="statWins">Wins</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-value1">?</span>
+                <span class="stat-label" data-lang="statLosses">Losses</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-value">?</span>
+                <span class="stat-label" data-lang="statMatches">Matches</span>
+            </div>
+        </div>
+    </div>
 
     <img src="Cs.jpg" class="bg-image" alt="Background">
 
@@ -93,18 +141,17 @@
     </div>
 
     <div class="content">
-        <div class="glow"></div>
-        
         <h1 class="main-title">
             <span class="teks1" data-lang="titlePart1">TCK</span>
             <span class="highlight" data-lang="titlePart2">Team</span>
         </h1>
-
-        <div class="gif-container" 
-             onmouseenter="this.querySelector('img').src='https://media.tenor.com/gmbMn1iUZxgAAAAi/cat-%D0%BA%D0%BE%D1%82.gif'" 
-             onmouseleave="this.querySelector('img').src='cat_static.png'">
-            <img src="cat_static.png" alt="Cat Sticker">
+        <div class="gif-container" onmouseenter="this.querySelector('img').src='https://media.tenor.com/gmbMn1iUZxgAAAAi/cat-%D0%BA%D0%BE%D1%82.gif'" onmouseleave="this.querySelector('img').src='cat_static.png'">
+            <img src="cat_static.png" alt="Cat">
         </div>
+    </div>
+
+    <div class="marquee-container">
+        <marquee scrollamount="30" data-lang="runningText">Loading information...</marquee>
     </div>
 
     <nav class="bottom-nav">
@@ -116,22 +163,11 @@
     <script>
         function changeLang(lang) {
             localStorage.setItem('preferredLang', lang);
-            if (typeof updateLanguage === 'function') {
-                updateLanguage();
-            } else if (typeof translations !== 'undefined') {
-                const elements = document.querySelectorAll('[data-lang]');
-                elements.forEach(el => {
-                    const key = el.getAttribute('data-lang');
-                    if (translations[lang] && translations[lang][key]) {
-                        el.textContent = translations[lang][key];
-                    }
-                });
-            }
+            if (typeof updateLanguage === 'function') { updateLanguage(); }
             document.documentElement.lang = lang;
         }
-
         window.onload = function() {
-            let savedLang = localStorage.getItem('preferredLang') || (navigator.language.startsWith('ru') ? 'ru' : 'en');
+            let savedLang = localStorage.getItem('preferredLang') || 'en';
             changeLang(savedLang);
         };
     </script>
