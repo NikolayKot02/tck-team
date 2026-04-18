@@ -12,8 +12,8 @@
     <script src="../lang.js"></script>
 
     <style>
-        body, html { height: 100%; margin: 0; background-color: #000; overflow: hidden; }
-        body { color: white; font-family: 'Roboto', sans-serif; display: flex; justify-content: center; align-items: center; position: relative; padding: 20px; }
+        body, html { height: 100%; margin: 0; background-color: #000; overflow-x: hidden; }
+        body { color: white; font-family: 'Roboto', sans-serif; display: flex; justify-content: center; align-items: center; position: relative; padding: 20px; box-sizing: border-box; }
 
         /* ЗАГОЛОВОК СВЕРХУ СЛЕВА */
         .header {
@@ -47,7 +47,7 @@
         .tiktok:hover { background-color: rgba(37, 244, 238, 0.2); }
         .tiktok:hover .social-name { color: #25f4ee; }
 
-        /* Кнопка ВЫХОД в левом нижнем углу */
+        /* Кнопка ВЫХОД (десктоп) */
         .back-btn {
             position: fixed; bottom: 40px; left: 40px;
             color: #333; text-decoration: none; border: 1px solid #222;
@@ -56,11 +56,40 @@
         }
         .back-btn:hover { color: #FF0000; border-color: #FF0000; }
 
+        /* АДАПТАЦИЯ ПОД ТЕЛЕФОНЫ */
         @media (max-width: 768px) {
-            body { flex-direction: column; justify-content: flex-start; padding-top: 100px; overflow: auto; }
-            .header { position: static; margin-bottom: 30px; font-size: 32px; text-align: left; width: 100%; }
-            .social-grid { grid-template-columns: 1fr; }
-            .back-btn { position: static; margin-top: 30px; align-self: flex-start; }
+            body { 
+                flex-direction: column; 
+                justify-content: flex-start; 
+                padding-top: 100px; 
+                padding-bottom: 100px; /* Чтобы контент не перекрывался кнопкой */
+                overflow-y: auto; 
+            }
+            .header { 
+                position: static; 
+                margin-bottom: 30px; 
+                font-size: 32px; 
+                text-align: center; 
+                width: 100%; 
+            }
+            .social-grid { grid-template-columns: 1fr; width: 100%; }
+            .social-item { padding: 40px 20px; text-align: center; }
+            
+            /* ФИКС: Кнопка на мобилках всегда снизу */
+            .back-btn { 
+                position: fixed; 
+                bottom: 15px; 
+                left: 15px; 
+                right: 15px; 
+                text-align: center;
+                background: rgba(10, 10, 10, 0.95); 
+                backdrop-filter: blur(5px);
+                border: 1px solid #333;
+                padding: 15px; 
+                font-size: 14px;
+                color: #888;
+                border-radius: 4px;
+            }
         }
     </style>
 </head>
@@ -81,17 +110,16 @@
             <span class="social-label" data-lang="dsLabel">Discord</span>
             <span class="social-name">TCK Team</span>
         </a>
-        <a href="https://www.tiktok.com/@tck_team_cs?is_from_webapp=1&sender_device=pc" target="_blank" class="social-item tiktok">
+        <a href="https://www.tiktok.com/@tck_team_cs" target="_blank" class="social-item tiktok">
             <span class="social-label" data-lang="ttLabel">TikTok</span>
             <span class="social-name">@tck_team_cs</span>
         </a>
     </div>
 
-    <!-- Кнопка назад с поддержкой перевода -->
+    <!-- Кнопка назад -->
     <a href="../" class="back-btn" data-lang="backBtn">← Back to Main</a>
 
     <script>
-        // Инициализация перевода при загрузке
         window.onload = function() {
             if (typeof updateLanguage === 'function') {
                 updateLanguage();
