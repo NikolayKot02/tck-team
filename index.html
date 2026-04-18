@@ -69,11 +69,14 @@
         .gif-container { margin-top: 20px; width: 150px; height: 150px; cursor: pointer; transition: 0.3s; }
         .gif-container img { width: 100%; height: 100%; object-fit: contain; }
 
+        /* БЕГУЩАЯ СТРОКА СО СВЕЧЕНИЕМ */
         .marquee-container { 
             width: 100%; background: rgba(255, 0, 0, 0.1); 
             border-top: 1px solid rgba(255, 0, 0, 0.3); 
             color: #ff0000; padding: 8px 0; font-size: 14px; 
             font-weight: 900; text-transform: uppercase; z-index: 20; 
+            /* Добавляем глоу эффект тексту */
+            text-shadow: 0 0 5px #ff0000, 0 0 5px rgba(255, 0, 0, 0.8);
         }
 
         /* НИЖНЯЯ ПАНЕЛЬ */
@@ -94,7 +97,6 @@
 
         .nav-item:last-child { border-right: none; }
 
-        /* Линия с гловом */
         .nav-item::after {
             content: ''; position: absolute; bottom: 0; left: 50%;
             width: 0; height: 3px; background: #ff0000;
@@ -102,7 +104,6 @@
             transition: 0.4s ease; transform: translateX(-50%);
         }
 
-        /* ЭФФЕКТ ПРИ НАВЕДЕНИИ: КРАСНЫЙ ТЕКСТ + СВЕЧЕНИЕ ТЕКСТА */
         .nav-item:hover { 
             color: #ff0000; 
             background: rgba(255, 0, 0, 0.05);
@@ -158,7 +159,7 @@
     </div>
 
     <div class="marquee-container">
-        <marquee scrollamount="30" data-lang="runningText">Loading information...</marquee>
+        <marquee scrollamount="25" data-lang="runningText">Loading information...</marquee>
     </div>
 
     <nav class="bottom-nav">
