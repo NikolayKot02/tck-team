@@ -2,21 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <!-- ИСПРАВЛЕНО: Добавлен viewport для корректного масштаба на телефонах -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TCK Team | Sostav</title>
 	
-	<!-- МЕТАТЕГИ ДЛЯ СОЦСЕТЕЙ (Social Preview) -->
     <meta name="description" content="The official roster of the TCK Team eSports team.">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://nikolaykot02.github.io/tck-team/Logowebsite.png"> <!-- ЗАМЕНИТЕ НА СВОЮ ССЫЛКУ -->
+    <meta property="og:url" content="https://github.io">
     <meta property="og:title" content="TCK Team | Roster">
     <meta property="og:description" content="The official roster of the TCK Team eSports team.">
-    <meta property="og:image" content="https://nikolaykot02.github.io/tck-team/Logowebsite.png"> <!-- ПОЛНАЯ ССЫЛКА НА ЛОГО -->
-
-    <!-- Twitter / Discord Large Card -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content="https://nikolaykot02.github.io/tck-team/Logowebsite.png">
+    <meta property="og:image" content="https://github.io">
 
     <link rel="icon" type="image/png" href="../Logo_TCK.png">
     <link rel="preconnect" href="https://googleapis.com">
@@ -24,22 +18,12 @@
 
     <style>
         body { font-family: 'Roboto', sans-serif; padding: 40px; background-color: #0a0a0a; color: white; margin: 0; box-sizing: border-box; }
-
         .sostav-title { font-weight: 900; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 50px; font-size: 48px; text-align: left; color: #FF0000; }
+        .roster-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; max-width: 1200px; margin: 0 auto; }
 
-        .roster-container { 
-            display: flex; 
-            flex-wrap: wrap; 
-            justify-content: center; /* Центрируем карточки на мобилках */
-            gap: 20px; 
-            max-width: 1200px; 
-            margin: 0 auto; 
-        }
-
-        .player-card { background-color: #111; border: 1px solid #333; width: 200px; padding: 10px; text-align: left; transition: 0.3s; cursor: pointer; }
+        .player-card { background-color: #111; border: 1px solid #333; width: 200px; padding: 10px; text-align: left; transition: 0.3s; cursor: pointer; position: relative; }
         .player-card:hover { transform: translateY(-5px); border-color: #FF0000; box-shadow: 0 0 20px rgba(255, 0, 0, 0.6), inset 0 0 10px rgba(255, 0, 0, 0.2); }
         .player-card:hover .player-name2 { color: #FF0000; }
-
         .player-card.blue-hover:hover { border-color: #002aff; box-shadow: 0 0 20px rgba(0, 42, 255, 0.6), inset 0 0 10px rgba(0, 42, 255, 0.2); }
         .player-card.blue-hover:hover .player-name { color: #002aff; }
 
@@ -51,22 +35,16 @@
 
         .player-name { font-size: 22px; font-weight: 900; text-transform: uppercase; margin: 5px 0; transition: 0.3s; }
         .player-name2 { font-size: 16px; font-weight: 900; text-transform: uppercase; margin: 5px 0; transition: 0.3s; }
+        
         .player-country { font-size: 12px; color: #666; text-align: right; margin-top: -20px; }
+        .player-faceit-brief { font-size: 10px; color: #ff5500; text-align: right; font-weight: bold; margin-top: 2px; text-transform: uppercase; }
 
-        /* Кнопка назад */
         .back-btn { position: fixed; bottom: 20px; left: 20px; z-index: 1001; color: #555; text-decoration: none; border: 1px solid #333; padding: 10px 30px; border-radius: 2px; text-transform: uppercase; font-size: 14px; transition: 0.3s; background: #0a0a0a; }
         .back-btn:hover { color: #FF0000; border-color: #FF0000; }
 
-        /* МОДАЛЬНОЕ ОКНО */
         .modal { display: none; position: fixed; z-index: 2000; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0); justify-content: center; align-items: center; transition: 0.4s ease; }
         .modal.active { background: rgba(0,0,0,0.9); }
-
-        .modal-content { 
-            background: #111; border: 1px solid #FF0000; 
-            box-shadow: 0 0 30px rgba(255, 0, 0, 0.4); 
-            max-width: 800px; width: 90%; display: flex; position: relative; 
-            transform: translateY(-100vh); transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.1); 
-        }
+        .modal-content { background: #111; border: 1px solid #FF0000; box-shadow: 0 0 30px rgba(255, 0, 0, 0.4); max-width: 800px; width: 90%; display: flex; position: relative; transform: translateY(-100vh); transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.1); }
         .modal.active .modal-content { transform: translateY(0); }
         .modal.closing .modal-content { transform: translateY(100vh); }
         .modal.is-blue .modal-content { border-color: #002aff; box-shadow: 0 0 30px rgba(0, 42, 255, 0.5); }
@@ -77,30 +55,16 @@
         .modal-img-container img { width: 100%; height: 100%; object-fit: cover; }
         .modal-text-container { width: 60%; padding: 40px; }
         .close-btn { position: absolute; top: 15px; right: 20px; cursor: pointer; color: #555; font-size: 28px; z-index: 10; }
-        .modal-info { color: #ccc; line-height: 1.6; }
+        
+        .modal-info { color: #ccc; line-height: 1.6; margin-bottom: 20px; }
+        .faceit-link { display: inline-block; padding: 10px 20px; border: 2px solid #ff5500; color: #fff; background: #ff5500; text-decoration: none; font-weight: bold; text-transform: uppercase; font-size: 13px; transition: 0.3s; border-radius: 2px; }
+        .faceit-link:hover { background: transparent; color: #ff5500; }
 
-        /* АДАПТИВНОСТЬ ДЛЯ ТЕЛЕФОНОВ */
         @media (max-width: 768px) {
-            body { padding: 20px; padding-bottom: 100px; }
-            .sostav-title { font-size: 32px; text-align: center; margin-bottom: 30px; }
-
-            .player-card { width: 45%; } /* Две карточки в ряд на средних экранах */
-
             .modal-content { flex-direction: column; overflow-y: auto; max-height: 90vh; }
             .modal-img-container, .modal-text-container { width: 100%; }
             .modal-img-container { height: 250px; }
             .modal-text-container { padding: 20px; }
-            .modal-name { font-size: 28px; }
-
-            .back-btn { 
-                left: 10px; right: 10px; bottom: 10px; 
-                text-align: center; padding: 15px; 
-                background: rgba(10, 10, 10, 0.95);
-            }
-        }
-
-        @media (max-width: 480px) {
-            .player-card { width: 100%; max-width: 280px; } /* Одна карточка в ряд на маленьких телефонах */
         }
     </style>
 </head>
@@ -109,18 +73,22 @@
     <h1 class="sostav-title" data-lang="sostavTitle">Roster Tck Team</h1>
 
     <div class="roster-container">
-        <div class="player-card" onclick="showInfo('smert_v_loutabe', 'player_smert_info', 'smert_v_loutabe.jpg', false)">
+        <!-- КАРТОЧКА 1: Число 2500 отобразится только на карточке -->
+        <div class="player-card" onclick="showInfo('smert_v_loutabe', 'player_smert_info', 'smert_v_loutabe.jpg', false, 'https://faceit.com')">
             <div class="player-role">Creator TCK team</div>
             <div class="player-photo"><img src="smert_v_loutabe.jpg"></div>
             <div class="player-name2">smert_v_loutabe</div>
             <div class="player-country">UA</div>
+            <div class="player-faceit-brief">Faceit: ?lvl</div>
         </div>
 
-        <div class="player-card blue-hover" onclick="showInfo('Barsic', 'player_2_info', 'barsic.jpg', true)">
+        <!-- КАРТОЧКА 2 -->
+        <div class="player-card blue-hover" onclick="showInfo('Barsic', 'player_2_info', 'barsic.jpg', true, 'https://faceit.com')">
             <div class="player-role2">Skill</div>
             <div class="player-photo"><img src="barsic.jpg"></div>
             <div class="player-name">Barsik</div>
             <div class="player-country">UA</div>
+            <div class="player-faceit-brief">Faceit: ?lvl</div>
         </div>
     </div>
 
@@ -131,6 +99,7 @@
             <div class="modal-text-container">
                 <h2 id="infoName" class="modal-name"></h2>
                 <p id="infoText" class="modal-info"></p>
+                <div id="faceitButtonContainer"></div>
             </div>
         </div>
     </div>
@@ -139,11 +108,19 @@
 
     <script src="../lang.js"></script>
     <script>
-        function showInfo(name, infoKey, imgPath, isBlue) {
+        function showInfo(name, infoKey, imgPath, isBlue, faceitUrl) {
             const modal = document.getElementById('infoModal');
             document.getElementById('infoName').innerText = name;
             document.getElementById('infoText').innerText = typeof getTranslation === "function" ? getTranslation(infoKey) : infoKey;
             document.getElementById('modalImg').src = imgPath || '';
+
+            const btnContainer = document.getElementById('faceitButtonContainer');
+
+            if (faceitUrl) {
+                btnContainer.innerHTML = `<a href="${faceitUrl}" target="_blank" class="faceit-link" data-lang="faceit">Посмотреть на Faceit</a>`;
+            } else {
+                btnContainer.innerHTML = '';
+            }
 
             if (isBlue) modal.classList.add('is-blue');
             else modal.classList.remove('is-blue');
