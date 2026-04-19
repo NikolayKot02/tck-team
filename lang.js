@@ -28,7 +28,7 @@ const translations = {
         chell_3_info:"Моральная поддержка. Идеи для сайта.",
         menuthank:"Спасибо за помощь",
         watchYT:"Смотрите на YouTube",
-        minitext:"Этот спорт был создан в 2026 году."
+        minitext:"Украинский киберспорт · 2026"
     },
     en: {
         titlePart1: "TCK",
@@ -59,7 +59,7 @@ const translations = {
         chell_3_info:"Moral support. Website ideas.",
         menuthank:"Thanks for help",
         watchYT:"Watch on YouTube",
-        minitext:"This sport was created in 2026."
+        minitext:"Ukrainian Esports · 2026"
     },
     ua: {
         titlePart1: "TCK",
@@ -90,7 +90,7 @@ const translations = {
         chell_3_info:"Моральна підтримка. Ідеї ​​для сайту.",
         menuthank:"Дякую за допомогу",
         watchYT:"Дивитися на YouTube",
-        minitext:"Цей спорт був створений у 2026 році."
+        minitext:"Український кіберспорт · 2026"
     }
 };
 
