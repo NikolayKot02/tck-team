@@ -28,7 +28,8 @@ const translations = {
         chell_3_info:"Моральная поддержка. Идеи для сайта.",
         menuthank:"Спасибо за помощь",
         watchYT:"Смотрите на YouTube",
-        minitext:"Украинский киберспорт · 2026"
+        minitext:"Украинский киберспорт · 2026",
+        faceit:"Посмотреть на Faceit"
     },
     en: {
         titlePart1: "TCK",
@@ -59,7 +60,8 @@ const translations = {
         chell_3_info:"Moral support. Website ideas.",
         menuthank:"Thanks for help",
         watchYT:"Watch on YouTube",
-        minitext:"Ukrainian Esports · 2026"
+        minitext:"Ukrainian Esports · 2026",
+        faceit:"View on Faceit"
     },
     ua: {
         titlePart1: "TCK",
@@ -90,7 +92,8 @@ const translations = {
         chell_3_info:"Моральна підтримка. Ідеї ​​для сайту.",
         menuthank:"Дякую за допомогу",
         watchYT:"Дивитися на YouTube",
-        minitext:"Український кіберспорт · 2026"
+        minitext:"Український кіберспорт · 2026",
+        faceit:"Подивитись на Faceit"
     }
 };
 
