@@ -21,6 +21,7 @@
         .sostav-title { font-weight: 900; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 50px; font-size: 48px; text-align: left; color: #FF0000; }
         .roster-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; max-width: 1200px; margin: 0 auto; }
 
+        /* Карточки */
         .player-card { background-color: #111; border: 1px solid #333; width: 200px; padding: 10px; text-align: left; transition: 0.3s; cursor: pointer; position: relative; }
         .player-card:hover { transform: translateY(-5px); border-color: #FF0000; box-shadow: 0 0 20px rgba(255, 0, 0, 0.6), inset 0 0 10px rgba(255, 0, 0, 0.2); }
         .player-card:hover .player-name2 { color: #FF0000; }
@@ -39,9 +40,11 @@
         .player-country { font-size: 12px; color: #666; text-align: right; margin-top: -20px; }
         .player-faceit-brief { font-size: 10px; color: #ff5500; text-align: right; font-weight: bold; margin-top: 2px; text-transform: uppercase; }
 
+        /* Кнопка Назад (Десктоп) */
         .back-btn { position: fixed; bottom: 20px; left: 20px; z-index: 1001; color: #555; text-decoration: none; border: 1px solid #333; padding: 10px 30px; border-radius: 2px; text-transform: uppercase; font-size: 14px; transition: 0.3s; background: #0a0a0a; }
         .back-btn:hover { color: #FF0000; border-color: #FF0000; }
 
+        /* Модальное окно */
         .modal { display: none; position: fixed; z-index: 2000; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0); justify-content: center; align-items: center; transition: 0.4s ease; }
         .modal.active { background: rgba(0,0,0,0.9); }
         .modal-content { background: #111; border: 1px solid #FF0000; box-shadow: 0 0 30px rgba(255, 0, 0, 0.4); max-width: 800px; width: 90%; display: flex; position: relative; transform: translateY(-100vh); transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.1); }
@@ -60,12 +63,26 @@
         .faceit-link { display: inline-block; padding: 10px 20px; border: 2px solid #ff5500; color: #fff; background: #ff5500; text-decoration: none; font-weight: bold; text-transform: uppercase; font-size: 13px; transition: 0.3s; border-radius: 2px; }
         .faceit-link:hover { background: transparent; color: #ff5500; }
 
+        /* Адаптивность */
         @media (max-width: 768px) {
+            body { padding: 20px; padding-bottom: 100px; }
+            .sostav-title { font-size: 32px; text-align: center; margin-bottom: 30px; }
+            .player-card { width: 45%; }
             .modal-content { flex-direction: column; overflow-y: auto; max-height: 90vh; }
             .modal-img-container, .modal-text-container { width: 100%; }
             .modal-img-container { height: 250px; }
             .modal-text-container { padding: 20px; }
+            .modal-name { font-size: 28px; }
+
+            /* Кнопка назад по центру снизу */
+            .back-btn { 
+                left: 10px; right: 10px; bottom: 10px; 
+                text-align: center; padding: 15px; 
+                background: rgba(10, 10, 10, 0.95);
+                position: fixed;
+            }
         }
+        @media (max-width: 480px) { .player-card { width: 100%; max-width: 280px; } }
     </style>
 </head>
 <body>
@@ -73,7 +90,7 @@
     <h1 class="sostav-title" data-lang="sostavTitle">Roster Tck Team</h1>
 
     <div class="roster-container">
-        <!-- Пример карточки (передаем только ссылку в конце) -->
+        <!-- Карточка 1 -->
         <div class="player-card" onclick="showInfo('smert_v_loutabe', 'player_smert_info', 'smert_v_loutabe.jpg', false, 'https://faceit.com')">
             <div class="player-role">Creator TCK team</div>
             <div class="player-photo"><img src="smert_v_loutabe.jpg"></div>
@@ -82,6 +99,7 @@
             <div class="player-faceit-brief">Faceit: ?lvl</div>
         </div>
 
+        <!-- Карточка 2 -->
         <div class="player-card blue-hover" onclick="showInfo('Barsic', 'player_2_info', 'barsic.jpg', true, 'https://faceit.com')">
             <div class="player-role2">Skill</div>
             <div class="player-photo"><img src="barsic.jpg"></div>
@@ -91,6 +109,7 @@
         </div>
     </div>
 
+    <!-- Модальное окно -->
     <div id="infoModal" class="modal" onclick="closeInfo()">
         <div class="modal-content" onclick="event.stopPropagation()">
             <span class="close-btn" onclick="closeInfo()">&times;</span>
@@ -105,22 +124,20 @@
 
     <a href="../" class="back-btn" data-lang="backBtn">← Back to Main</a>
 
-    <!-- Подключаем твой файл с переводами -->
+    <!-- Скрипты -->
     <script src="../lang.js"></script>
-
     <script>
         function showInfo(name, infoKey, imgPath, isBlue, faceitUrl) {
             const modal = document.getElementById('infoModal');
             document.getElementById('infoName').innerText = name;
             
-            // Используем твою функцию перевода для описания
+            // Перевод текста описания
             document.getElementById('infoText').innerText = typeof getTranslation === "function" ? getTranslation(infoKey) : infoKey;
             document.getElementById('modalImg').src = imgPath || '';
 
             const btnContainer = document.getElementById('faceitButtonContainer');
-
             if (faceitUrl) {
-                // ПОЛУЧАЕМ ПЕРЕВОД ДЛЯ ТЕКСТА КНОПКИ ИЗ ТВОЕГО ОБЪЕКТА (faceit: "Посмотреть на Faceit")
+                // Перевод текста кнопки Faceit из твоего lang.js
                 const btnText = typeof getTranslation === "function" ? getTranslation('faceit') : "Faceit";
                 btnContainer.innerHTML = `<a href="${faceitUrl}" target="_blank" class="faceit-link">${btnText}</a>`;
             } else {
@@ -145,6 +162,7 @@
         }
 
         window.onkeydown = (e) => { if (e.key === "Escape") closeInfo(); };
+        
         window.onload = function() { 
             if (typeof updateLanguage === "function") updateLanguage(); 
         };
