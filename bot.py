@@ -5,8 +5,8 @@ import base64
 import os
 
 # Эти данные бот возьмет из настроек хостинга, а не из кода
-TOKEN = os.getenv('MTQ5NjIyMjE4MzU4MjYwMTM0OA.GTuhzp.MY25eRTUXlE-7w1QhI5uzMRMgYQbt70wdBF6M0')
-GITHUB_TOKEN = os.getenv('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')
+TOKEN = os.getenv('DISCORD_TOKEN')
+GITHUB_TOKEN = os.getenv('GH_TOKEN')
 REPO_NAME = "nikolaykot02/tck-team" # ЗАМЕНИ НА СВОЁ (например: ivan/my-site)
 FILE_PATH = "logs.txt"
 CHANNEL_ID = 1496225381928145166# ЗАМЕНИ НА ID СВОЕГО КАНАЛА
