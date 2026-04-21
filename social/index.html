@@ -118,6 +118,22 @@
         .back-btn:hover { color: #FF0000; border-color: #FF0000; }
         .back-btn:hover { color: #FF0000; border-color: #FF0000; box-shadow: 0 0 15px rgba(255, 0, 0, 0.3); }
 
+        /* LIVE текст для Twitch */
+        .twitch-live {
+            display: none; margin-top: 15px; padding: 8px 16px;
+            background: #ff0000; color: #fff; font-weight: 900;
+            font-size: 14px; text-transform: uppercase; letter-spacing: 2px;
+            border-radius: 4px; animation: livePulse 0.5s infinite alternate;
+        }
+        .twitch-live.show {
+            display: inline-block;
+            box-shadow: 0 0 20px #ff0000, 0 0 40px rgba(255, 0, 0, 0.5);
+        }
+        @keyframes livePulse {
+            from { transform: scale(1); }
+            to { transform: scale(1.05); }
+        }
+
         /* АДАПТАЦИЯ ПОД ТЕЛЕФОНЫ */
         /* АДАПТИВНОСТЬ */
         @media (max-width: 768px) {
@@ -170,6 +186,7 @@
         <a href="https://www.twitch.tv/tck_team_cs2" target="_blank" class="social-item twitch">
             <span class="social-label" data-lang="twitchLabel">Twitch</span>
             <span class="social-name">@TCK_TEAM</span>
+            <span class="twitch-live" id="twitchLive">● LIVE</span>
         </a>
         <!-- YouTube (Справа налево) -->
         <a href="http://www.youtube.com/@TCKteam" target="_blank" class="social-item youtube">
@@ -196,7 +213,23 @@
             if (typeof updateLanguage === 'function') {
                 updateLanguage();
             }
+            // Проверка статуса таймера
+            checkTimerStatus();
+            // Проверяем каждые 5 секунд
+            setInterval(checkTimerStatus, 5000);
         };
+
+        function checkTimerStatus() {
+            const timerFinished = localStorage.getItem('timerFinished');
+            const timerHasDate = localStorage.getItem('timerHasDate');
+            const twitchLive = document.getElementById('twitchLive');
+            // Показываем LIVE только если есть дата И таймер закончился
+            if (timerFinished === 'true' && timerHasDate === 'true') {
+                twitchLive.classList.add('show');
+            } else {
+                twitchLive.classList.remove('show');
+            }
+        }
     </script>
 </body>
 </html>

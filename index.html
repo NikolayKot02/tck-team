@@ -149,6 +149,34 @@
         .lang-btn { background: rgba(0, 0, 0, 0.5); border: 1px solid #444; color: #777; padding: 5px 10px; cursor: pointer; margin-left: 5px; border-radius: 2px; font-size: 11px; }
         .lang-btn:hover { color: #fff; border-color: #ff0000; }
 
+        /* ТАЙМЕР */
+        .timer-container {
+            margin-top: 20px;
+            z-index: 25; display: flex; align-items: center; justify-content: center;
+        }
+        .timer-display {
+            font-family: 'JetBrains Mono', monospace; font-size: 28px; font-weight: 900;
+            color: #ff0000; text-shadow: 0 0 20px rgba(255, 0, 0, 0.8);
+            letter-spacing: 3px;
+        }
+        .timer-display.finished {
+            color: #ff0000; text-shadow: 0 0 30px rgba(255, 0, 0, 1);
+            animation: pulse 1s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        .live-text {
+            font-size: 36px; font-weight: 900; color: #ff0000;
+            text-shadow: 0 0 30px #ff0000, 0 0 60px #ff0000;
+            animation: livePulse 0.5s infinite alternate;
+        }
+        @keyframes livePulse {
+            from { transform: scale(1); }
+            to { transform: scale(1.1); }
+        }
+
         @media (max-width: 600px) {
             .top-bar { padding: 0 15px; height: 50px; }
             .top-nickname { font-size: 12px; }
@@ -189,6 +217,9 @@
         <div class="gif-container" onmouseenter="this.querySelector('img').src='https://media.tenor.com/gmbMn1iUZxgAAAAi/cat-%D0%BA%D0%BE%D1%82.gif'" onmouseleave="this.querySelector('img').src='cat_static.png'">
             <img src="cat_static.png" alt="Cat">
         </div>
+        <div class="timer-container">
+            <div class="timer-display" id="timerDisplay">Стрим: 00:00:00:00</div>
+        </div>
     </div>
 
     <div class="marquee-container">
@@ -203,6 +234,21 @@
     </nav>
 
     <script>
+        // ============================================
+        // НАСТРОЙКИ ТАЙМЕРА (измените здесь)
+        // ============================================
+        // Показывать таймер? (true = показать, false = скрыть)
+        var TIMER_VISIBLE = false;
+        
+        // Формат: "2026-04-25T20:00" (год-месяц-деньTчас:минута)
+        // Пример: "2026-04-25T20:00" = 25 апреля 2026 в 20:00
+        // Оставьте пустым "" чтобы не устанавливать дату через код
+        var TIMER_TARGET_DATE = ""; 
+        
+        // Автоматически запустить таймер при загрузке? (true/false)
+        var TIMER_AUTO_START = false;
+        // ============================================
+
         function changeLang(lang) {
             localStorage.setItem('preferredLang', lang);
             if (typeof updateLanguage === 'function') { updateLanguage(); }
@@ -211,7 +257,57 @@
         window.onload = function() {
             let savedLang = localStorage.getItem('preferredLang') || 'en';
             changeLang(savedLang);
+            
+            // Показать/скрыть таймер
+            const timerContainer = document.querySelector('.timer-container');
+            if (TIMER_VISIBLE) {
+                timerContainer.style.display = 'flex';
+                // Запуск таймера если дата установлена в коде
+                if (TIMER_TARGET_DATE) {
+                    targetDate = new Date(TIMER_TARGET_DATE);
+                    localStorage.setItem('timerHasDate', 'true');
+                    startTimer();
+                } else {
+                    localStorage.setItem('timerHasDate', 'false');
+                }
+            } else {
+                timerContainer.style.display = 'none';
+                localStorage.setItem('timerHasDate', 'false');
+            }
         };
+
+        let timerInterval = null;
+        let targetDate = null;
+
+        function startTimer() {
+            if (timerInterval) clearInterval(timerInterval);
+            
+            timerInterval = setInterval(function() {
+                const now = new Date().getTime();
+                const distance = targetDate - now;
+                
+                if (distance < 0) {
+                    // Таймер закончился
+                    clearInterval(timerInterval);
+                    const display = document.getElementById('timerDisplay');
+                    display.innerHTML = '<span class="live-text">LIVE</span>';
+                    localStorage.setItem('timerFinished', 'true');
+                } else {
+                    // Обратный отсчет
+                    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                    
+                    document.getElementById('timerDisplay').textContent = 
+                        String(days).padStart(2, '0') + ':' +
+                        String(hours).padStart(2, '0') + ':' +
+                        String(minutes).padStart(2, '0') + ':' +
+                        String(seconds).padStart(2, '0');
+                    localStorage.setItem('timerFinished', 'false');
+                }
+            }, 1000);
+        }
     </script>
 </body>
 </html>
