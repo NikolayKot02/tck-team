@@ -3,13 +3,13 @@ from discord.ext import commands
 import requests
 import base64
 import os
-from keep_alive import keep_alive  # Импортируем наш мини-сервер
+from keep_alive import keep_alive
 
-# Настройки (Берутся из переменных окружения на Render)
+# Настройки из Render (Environment Variables)
 TOKEN = os.getenv('DISCORD_TOKEN')
 GITHUB_TOKEN = os.getenv('GH_TOKEN')
 
-# ТВОИ НАСТРОЙКИ
+# Твои данные
 REPO_NAME = "NikolayKot02/tck-team" 
 FILE_PATH = "logs.txt"
 CHANNEL_ID = 1496225381928145166  # Твой ID канала
@@ -19,15 +19,14 @@ intents.message_content = True
 bot = commands.Bot(command_prefix="!", intents=intents)
 
 def update_github(content):
-    # ПРАВИЛЬНЫЙ URL ДЛЯ API
+    # ПРАВИЛЬНЫЙ API URL
     url = f"https://github.com{REPO_NAME}/contents/{FILE_PATH}"
-    "
     headers = {
         "Authorization": f"token {GITHUB_TOKEN}",
         "Accept": "application/vnd.github.v3+json"
     }
     
-    # 1. Пытаемся получить текущий файл, чтобы узнать его SHA и старый текст
+    # 1. Получаем текущую версию файла (SHA)
     r = requests.get(url, headers=headers)
     sha = None
     old_text = ""
@@ -36,47 +35,42 @@ def update_github(content):
         data = r.json()
         sha = data.get('sha')
         old_text = base64.b64decode(data['content']).decode('utf-8')
-    elif r.status_code != 404:
-        # Если ошибка не "Файл не найден", возвращаем код ошибки (например, 401 если плохой токен)
+    elif r.status_code == 404:
+        print("Файл не найден, будет создан новый.")
+    else:
         return r.status_code
-    
-    # 2. Добавляем новую строку в конец
+
+    # 2. Формируем новый текст
     new_text = old_text + "\n" + content
     encoded = base64.b64encode(new_text.encode('utf-8')).decode('utf-8')
     
-    # 3. Подготовка данных для отправки
+    # 3. Подготовка данных (SHA обязателен для обновления!)
     payload = {
-        "message": "Добавлена запись из Discord",
+        "message": "Update from Discord Bot",
         "content": encoded
     }
     if sha:
-        payload["sha"] = sha # Если файл существует, нужно передать его SHA
-    
-    # 4. Отправляем обновленный файл на GitHub
+        payload["sha"] = sha
+
+    # 4. Отправка на GitHub
     res = requests.put(url, headers=headers, json=payload)
     return res.status_code
 
 @bot.event
 async def on_ready():
-    print(f'Бот {bot.user} успешно запущен!')
+    print(f'Бот {bot.user} запущен!')
 
 @bot.event
 async def on_message(msg):
-    # Игнорируем сообщения от самого бота и из других каналов
-    if msg.author == bot.user:
-        return
-    if msg.channel.id != CHANNEL_ID:
+    if msg.author == bot.user or msg.channel.id != CHANNEL_ID:
         return
 
-    # Пытаемся записать в GitHub
     status = update_github(f"{msg.author}: {msg.content}")
     
-    # Коды 200 (OK) или 201 (Created) означают успех
     if status in [200, 201]:
         await msg.add_reaction('✅')
     else:
-        await msg.channel.send(f"❌ Ошибка GitHub: {status}. Проверь токен и права доступа.")
+        await msg.channel.send(f"❌ Ошибка GitHub: {status}. Проверь файл logs.txt и токен.")
 
-# Сначала запускаем веб-сервер "заглушку", потом бота
 keep_alive()
 bot.run(TOKEN)
