@@ -10,7 +10,7 @@ TOKEN = os.getenv('DISCORD_TOKEN')
 GITHUB_TOKEN = os.getenv('GH_TOKEN')
 
 # ТВОИ НАСТРОЙКИ
-REPO_NAME = "https://github.com/NikolayKot02/tck-team/blob/main/logs.txt" 
+REPO_NAME = "NikolayKot02/tck-team" 
 FILE_PATH = "logs.txt"
 CHANNEL_ID = 1496225381928145166  # ЗАМЕНИ НА ID СВОЕГО КАНАЛА
 
@@ -19,7 +19,7 @@ intents.message_content = True
 bot = commands.Bot(command_prefix="!", intents=intents)
 
 def update_github(content):
-    url = f"https://github.com{REPO_NAME}/contents/{FILE_PATH}"
+    url = f"https://github.com/NikolayKot02/tck-team/blob/main/logs.txt"
     headers = {"Authorization": f"token {GITHUB_TOKEN}"}
     
     # Пытаемся получить файл
