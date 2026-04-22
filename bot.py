@@ -20,7 +20,7 @@ bot = commands.Bot(command_prefix="!", intents=intents)
 
 def update_github(content):
     # ПРАВИЛЬНЫЙ API URL
-    url = f"https://github.com{REPO_NAME}/contents/{FILE_PATH}"
+    url = f"https://github.com/{REPO_NAME}/contents/{FILE_PATH}"
     headers = {
         "Authorization": f"token {GITHUB_TOKEN}",
         "Accept": "application/vnd.github.v3+json"
