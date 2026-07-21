@@ -5,41 +5,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TCK Team | Match History</title>
 
-    
     <meta name="description" content="TCK Team eSports match history. Results, scores, and game replays.">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://nikolaykot02.github.io/tck-team/Logowebsite.png"> <!-- ЗАМЕНИТЕ НА СВОЮ ССЫЛКУ -->
+    <meta property="og:url" content="https://nikolaykot02.github.io/tck-team/Logowebsite.png">
     <meta property="og:title" content="TCK Team | Match history">
     <meta property="og:description" content="TCK Team eSports match history. Results, scores, and game replays.">
-    <meta property="og:image" content="https://nikolaykot02.github.io/tck-team/Logowebsite.png"> <!-- ПОЛНАЯ ССЫЛКА НА ЛОГО -->
+    <meta property="og:image" content="https://nikolaykot02.github.io/tck-team/Logowebsite.png">
 
-    <!-- Twitter / Discord Large Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content="https://nikolaykot02.github.io/tck-team/Logowebsite.png">
 
-    
     <link rel="icon" type="image/png" href="../Logo_TCK.png">
     <link rel="preconnect" href="https://googleapis.com">
     <link rel="preconnect" href="https://gstatic.com" crossorigin>
-    
+
     <script src="../lang.js"></script>
 
     <style>
         body { background-color: #000; color: white; font-family: 'Roboto', sans-serif; margin: 0; padding: 40px; box-sizing: border-box; }
-        
+
         .header { color: #FF0000; font-size: 36px; text-transform: uppercase; font-weight: 900; margin-bottom: 40px; }
 
         .match-list { display: flex; flex-direction: column; width: 100%; }
-        
-        .match-item { 
-            display: flex; justify-content: space-between; align-items: center; 
-            padding: 25px 15px; border-bottom: 1px solid #111; 
-            cursor: pointer; transition: 0.3s; 
-            position: relative; 
+
+        .match-item {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 25px 15px; border-bottom: 1px solid #111;
+            cursor: pointer; transition: 0.3s;
+            position: relative;
             overflow: hidden;
         }
 
-        /* ЛИНИЯ ИЗ СЕРЕДИНЫ */
         .match-item::after {
             content: '';
             position: absolute;
@@ -54,14 +50,12 @@
 
         .match-item:hover::after { width: 100%; }
 
-        /* ЦВЕТА ЦИФР (ФИКСИРОВАННЫЕ) */
         .win { color: #00ff00 !important; }
         .lose { color: #ff0000 !important; }
         .draw { color: #ffff00 !important; }
 
         .match-item:hover { background: rgba(255, 255, 255, 0.03); }
 
-        /* ЭФФЕКТЫ ЛИНИИ ПРИ НАВЕДЕНИИ */
         .match-item:has(.win):hover::after { background: #00ff00; box-shadow: 0 0 15px #00ff00; }
         .match-item:has(.lose):hover::after { background: #ff0000; box-shadow: 0 0 15px #ff0000; }
         .match-item:has(.draw):hover::after { background: #ffff00; box-shadow: 0 0 15px #ffff00; }
@@ -72,19 +66,17 @@
         .enemy-team { font-weight: 900; color: #666; font-size: 18px; text-transform: uppercase; }
         .score { font-size: 20px; font-weight: 900; letter-spacing: 1px; text-align: right; padding-right: 10px; z-index: 3; }
 
-        /* МОДАЛЬНОЕ ОКНО */
         .modal { display: none; position: fixed; z-index: 999; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0); justify-content: center; align-items: center; transition: 0.4s ease; }
         .modal.active { background: rgba(0,0,0,0.9); }
-        .modal-content { 
-            background: #111; border: 2px solid #333; 
-            max-width: 500px; width: 90%; padding: 40px; 
-            text-align: center; position: relative; 
-            transform: translateY(-100vh); 
-            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.1); 
+        .modal-content {
+            background: #111; border: 2px solid #333;
+            max-width: 500px; width: 90%; padding: 40px;
+            text-align: center; position: relative;
+            transform: translateY(-100vh);
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.1);
         }
         .modal.active .modal-content { transform: translateY(0); }
 
-        /* СВЕЧЕНИЕ (GLOW) В МОДАЛКЕ ПО РЕЗУЛЬТАТУ */
         .modal.is-win .modal-content { border-color: #00ff00; box-shadow: 0 0 40px rgba(0, 255, 0, 0.4); }
         .modal.is-win #mRounds { color: #00ff00; text-shadow: 0 0 20px #00ff00, 0 0 40px rgba(0, 255, 0, 0.5); }
 
@@ -98,11 +90,10 @@
         .yt-link { display: inline-block; margin-top: 25px; padding: 12px 25px; background: #FF0000; color: #fff; text-decoration: none; font-weight: 900; text-transform: uppercase; font-size: 12px; border-radius: 2px; transition: 0.3s; }
         .yt-link:hover { background: #fff; color: #000; }
         .close-btn { position: absolute; top: 15px; right: 20px; cursor: pointer; color: #555; font-size: 28px; }
-        
+
         .back-btn { position: fixed; bottom: 20px; left: 20px; z-index: 1001; color: #555; text-decoration: none; border: 1px solid #333; padding: 10px 30px; border-radius: 2px; text-transform: uppercase; font-size: 11px; background: #000; transition: 0.3s; }
         .back-btn:hover { color: #FF0000; border-color: #FF0000; }
 
-        /* МОБИЛЬНАЯ ВЕРСИЯ */
         @media (max-width: 768px) {
             body { padding: 20px; padding-top: 30px; padding-bottom: 100px; }
             .header { font-size: 26px; text-align: center; }
@@ -117,73 +108,71 @@
 </head>
 <body>
 
-    <div class="header" data-lang="menuMatches">Match History</div>
+<div class="header" data-lang="menuMatches">Match History</div>
 
-    <div class="match-list">
-        <div class="match-item" onclick="openMatch(this, '??', 'https://youtube.com')">
-            <div class="teams-box">
-                <span class="our-team">TCK</span> <span class="vs">vs</span> <span class="enemy-team">??</span>
-            </div>
-            <div class="score win">?:?</div>
+<div class="match-list">
+    <div class="match-item" onclick="openMatch(this, '??', 'https://youtube.com')">
+        <div class="teams-box">
+            <span class="our-team">TCK</span> <span class="vs">vs</span> <span class="enemy-team">??</span>
         </div>
-
-        <div class="match-item" onclick="openMatch(this, '??', 'https://youtube.com')">
-            <div class="teams-box">
-                <span class="our-team">TCK</span> <span class="vs">vs</span> <span class="enemy-team">??</span>
-            </div>
-            <div class="score lose">?:?</div>
-        </div>
-
-        <div class="match-item" onclick="openMatch(this, '??', 'https://youtube.com')">
-            <div class="teams-box">
-                <span class="our-team">TCK</span> <span class="vs">vs</span> <span class="enemy-team">??</span>
-            </div>
-            <div class="score draw">?:?</div>
-        </div>
+        <div class="score win">?:?</div>
     </div>
 
-    <div id="matchModal" class="modal" onclick="closeMatch()">
-        <div class="modal-content" onclick="event.stopPropagation()">
-            <span class="close-btn" onclick="closeMatch()">&times;</span>
-            <div id="mOpponent" style="font-size: 26px; font-weight: 900; text-transform: uppercase; color: white;">TEAM</div>
-            <div class="rounds-info" id="mRounds">0:0</div>
-            <a href="#" id="mYoutube" target="_blank" class="yt-link" data-lang="watchYT">Watch on YouTube</a>
+    <div class="match-item" onclick="openMatch(this, '??', 'https://youtube.com')">
+        <div class="teams-box">
+            <span class="our-team">TCK</span> <span class="vs">vs</span> <span class="enemy-team">??</span>
         </div>
+        <div class="score lose">?:?</div>
     </div>
 
-    <a href="../" class="back-btn" data-lang="backBtn">← Back to Main</a>
+    <div class="match-item" onclick="openMatch(this, '??', 'https://youtube.com')">
+        <div class="teams-box">
+            <span class="our-team">TCK</span> <span class="vs">vs</span> <span class="enemy-team">??</span>
+        </div>
+        <div class="score draw">?:?</div>
+    </div>
+</div>
 
-    <script>
-        function openMatch(element, opponent, ytLink) {
-            const modal = document.getElementById('matchModal');
-            const scoreElement = element.querySelector('.score');
-            const scoreText = scoreElement.innerText;
+<div id="matchModal" class="modal" onclick="closeMatch()">
+    <div class="modal-content" onclick="event.stopPropagation()">
+        <span class="close-btn" onclick="closeMatch()">&times;</span>
+        <div id="mOpponent" style="font-size: 26px; font-weight: 900; text-transform: uppercase; color: white;">TEAM</div>
+        <div class="rounds-info" id="mRounds">0:0</div>
+        <a href="#" id="mYoutube" target="_blank" class="yt-link" data-lang="watchYT">Watch on YouTube</a>
+    </div>
+</div>
 
-            document.getElementById('mOpponent').innerText = opponent;
-            document.getElementById('mRounds').innerText = scoreText;
-            document.getElementById('mYoutube').href = ytLink;
+<a href="../" class="back-btn" data-lang="backBtn">← Back to Main</a>
 
-            // Сбрасываем старые классы свечения
-            modal.classList.remove('is-win', 'is-lose', 'is-draw');
+<script>
+    function openMatch(element, opponent, ytLink) {
+        const modal = document.getElementById('matchModal');
+        const scoreElement = element.querySelector('.score');
+        const scoreText = scoreElement.innerText;
 
-            // Добавляем нужный класс в зависимости от цвета цифр
-            if (scoreElement.classList.contains('win')) modal.classList.add('is-win');
-            if (scoreElement.classList.contains('lose')) modal.classList.add('is-lose');
-            if (scoreElement.classList.contains('draw')) modal.classList.add('is-draw');
+        document.getElementById('mOpponent').innerText = opponent;
+        document.getElementById('mRounds').innerText = scoreText;
+        document.getElementById('mYoutube').href = ytLink;
 
-            modal.style.display = 'flex';
-            setTimeout(() => { modal.classList.add('active'); }, 10);
-        }
+        modal.classList.remove('is-win', 'is-lose', 'is-draw');
 
-        function closeMatch() {
-            const modal = document.getElementById('matchModal');
-            modal.classList.remove('active');
-            setTimeout(() => { modal.style.display = 'none'; }, 500);
-        }
+        if (scoreElement.classList.contains('win')) modal.classList.add('is-win');
+        if (scoreElement.classList.contains('lose')) modal.classList.add('is-lose');
+        if (scoreElement.classList.contains('draw')) modal.classList.add('is-draw');
 
-        window.onload = function() {
-            if (typeof updateLanguage === 'function') updateLanguage();
-        };
-    </script>
+        modal.style.display = 'flex';
+        setTimeout(() => { modal.classList.add('active'); }, 10);
+    }
+
+    function closeMatch() {
+        const modal = document.getElementById('matchModal');
+        modal.classList.remove('active');
+        setTimeout(() => { modal.style.display = 'none'; }, 500);
+    }
+
+    window.onload = function() {
+        if (typeof updateLanguage === 'function') updateLanguage();
+    };
+</script>
 </body>
 </html>

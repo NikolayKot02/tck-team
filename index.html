@@ -4,54 +4,47 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TCK Team</title>
-	
-	
-	<!-- МЕТАТЕГИ ДЛЯ СОЦСЕТЕЙ (Social Preview) -->
+
     <meta name="description" content="The official website of the TCK Team esports team. Rosters, matches, and social media.">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://nikolaykot02.github.io/tck-team/Logowebsite.png"> <!-- ЗАМЕНИТЕ НА СВОЮ ССЫЛКУ -->
+    <meta property="og:url" content="https://nikolaykot02.github.io/tck-team/Logowebsite.png">
     <meta property="og:title" content="TCK Team | Official Website">
     <meta property="og:description" content="The official website of the TCK Team esports team. Rosters, matches, and social media.">
-    <meta property="og:image" content="https://nikolaykot02.github.io/tck-team/Logowebsite.png"> <!-- ПОЛНАЯ ССЫЛКА НА ЛОГО -->
+    <meta property="og:image" content="https://nikolaykot02.github.io/tck-team/Logowebsite.png">
 
-    <!-- Twitter / Discord Large Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content="https://nikolaykot02.github.io/tck-team/Logowebsite.png">
 
-    <!-- ИКОНКА НА ВКЛАДКЕ БРАУЗЕРА -->
     <link rel="icon" type="image/png" href="Logo_TCK.png">
 
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
 
     <script src="lang.js"></script>
 
     <style>
-        body, html { 
-            margin: 0; padding: 0; height: 100%; 
-            background-color: #000; color: white; 
-            font-family: 'Roboto', sans-serif; 
-            display: flex; flex-direction: column; 
+        body, html {
+            margin: 0; padding: 0; height: 100%;
+            background-color: #000; color: white;
+            font-family: 'Roboto', sans-serif;
+            display: flex; flex-direction: column;
             overflow: hidden; position: relative;
         }
-		
-		.sub-text {
-    /* Добавляем !important, чтобы перебить основной стиль заголовка */
-			font-size: 20px !important; 
-    
-			font-family: 'JetBrains Mono', monospace;
-			font-style: italic;
-			color: #a0a0a0;
-			letter-spacing: 2px;
-			display: block; /* Чтобы текст был на отдельной строке сверху */
-			line-height: 4.5; /* Увеличим межстрочный интервал, чтобы не слипалось */
-			text-transform: none;
-			opacity: 1.0;
-		}
 
+        .sub-text {
+            font-size: 20px !important;
 
-        /* ВЕРХНЯЯ ПАНЕЛЬ */
+            font-family: 'JetBrains Mono', monospace;
+            font-style: italic;
+            color: #a0a0a0;
+            letter-spacing: 2px;
+            display: block;
+            line-height: 4.5;
+            text-transform: none;
+            opacity: 1.0;
+        }
+
         .top-bar {
             position: fixed; top: 0; left: 0; width: 100%;
             height: 60px; background: rgba(0, 0, 0, 0.9);
@@ -63,8 +56,8 @@
         }
 
         .top-left { display: flex; align-items: center; gap: 15px; }
-        .top-logo { 
-            width: 35px; height: 35px; border-radius: 50%; border: 1px solid #FF0000; 
+        .top-logo {
+            width: 35px; height: 35px; border-radius: 50%; border: 1px solid #FF0000;
             box-shadow: 0 0 10px rgba(255, 0, 0, 0.3); overflow: hidden; display: flex; justify-content: center; align-items: center;
         }
         .top-logo img { width: 100%; height: 100%; object-fit: cover; }
@@ -74,7 +67,7 @@
         .stat-item { text-align: center; }
         .stat-value { display: block; font-size: 18px; font-weight: 900; color: #0000FF; line-height: 1; }
         .stat-value1 { display: block; font-size: 18px; font-weight: 900; color: #FF0000; line-height: 1; }
-		.stat-value2 { display: block; font-size: 18px; font-weight: 900; color: #00ff00; line-height: 1; }
+        .stat-value2 { display: block; font-size: 18px; font-weight: 900; color: #00ff00; line-height: 1; }
         .stat-label { font-size: 8px; color: #666; text-transform: uppercase; letter-spacing: 1px; margin-top: 2px; }
 
         .bg-image {
@@ -83,50 +76,46 @@
             z-index: 1; transform: scale(1.1); pointer-events: none;
         }
 
-        .content { 
-            flex: 1; display: flex; flex-direction: column; 
-            justify-content: center; align-items: center; 
+        .content {
+            flex: 1; display: flex; flex-direction: column;
+            justify-content: center; align-items: center;
             z-index: 10; position: relative;
         }
 
         .main-title { text-align: center; text-transform: uppercase; line-height: 0.85; user-select: none; }
         .main-title span { display: block; font-size: clamp(50px, 12vw, 120px); letter-spacing: -2px; }
 
-		.teks1 { color: #002aff; }
+        .teks1 { color: #002aff; }
         .highlight { color: #ff0000; text-shadow: 0 0 30px rgba(0, 255, 0, 0.5); }
 
         .gif-container { margin-top: 20px; width: 150px; height: 150px; cursor: pointer; transition: 0.3s; }
         .gif-container img { width: 100%; height: 100%; object-fit: contain; }
 
-        /* БЕГУЩАЯ СТРОКА СО СВЕЧЕНИЕМ */
-        .marquee-container { 
-            width: 100%; background: rgba(255, 0, 0, 0.1); 
-            border-top: 1px solid rgba(255, 0, 0, 0.3); 
-            color: #ff0000; padding: 8px 0; font-size: 14px; 
-            font-weight: 900; text-transform: uppercase; z-index: 20; 
-            /* Добавляем глоу эффект тексту */
+        .marquee-container {
+            width: 100%; background: rgba(255, 0, 0, 0.1);
+            border-top: 1px solid rgba(255, 0, 0, 0.3);
+            color: #ff0000; padding: 8px 0; font-size: 14px;
+            font-weight: 900; text-transform: uppercase; z-index: 20;
             text-shadow: 0 0 10px #ff0000, 0 0 10px rgba(0, 255, 0, 0.8);
         }
 
-        /* НИЖНЯЯ ПАНЕЛЬ */
-        .bottom-nav { 
-            display: flex; width: 100%; 
-            border-top: 1px solid rgba(255, 255, 255, 0.1); 
-            background: rgba(0, 0, 0, 0.8); 
-            backdrop-filter: blur(10px); z-index: 20; 
+        .bottom-nav {
+            display: flex; width: 100%;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px); z-index: 20;
         }
 
-        .nav-item { 
-            flex: 1; padding: 25px 0; text-align: center; color: #888; 
-            text-transform: uppercase; font-size: 12px; letter-spacing: 1px; 
-            transition: 0.4s; cursor: pointer; background: none; border: none; 
-            font-weight: 700; border-right: 1px solid rgba(255,255,255,0.05); 
-            position: relative; overflow: hidden; 
+        .nav-item {
+            flex: 1; padding: 25px 0; text-align: center; color: #888;
+            text-transform: uppercase; font-size: 12px; letter-spacing: 1px;
+            transition: 0.4s; cursor: pointer; background: none; border: none;
+            font-weight: 700; border-right: 1px solid rgba(255,255,255,0.05);
+            position: relative; overflow: hidden;
         }
 
         .nav-item:last-child { border-right: none; }
 
-        /* Линия с гловом */
         .nav-item::after {
             content: ''; position: absolute; bottom: 0; left: 50%;
             width: 0; height: 3px; background: #ff0000;
@@ -134,9 +123,8 @@
             transition: 0.4s ease; transform: translateX(-50%);
         }
 
-        /* ЭФФЕКТ ПРИ НАВЕДЕНИИ: КРАСНЫЙ ТЕКСТ + СВЕЧЕНИЕ ТЕКСТА */
-        .nav-item:hover { 
-            color: #ff0000; 
+        .nav-item:hover {
+            color: #ff0000;
             background: rgba(255, 0, 0, 0.05);
             text-shadow: 0 0 10px #ff0000, 0 0 20px rgba(255, 0, 0, 0.6);
         }
@@ -149,7 +137,6 @@
         .lang-btn { background: rgba(0, 0, 0, 0.5); border: 1px solid #444; color: #777; padding: 5px 10px; cursor: pointer; margin-left: 5px; border-radius: 2px; font-size: 11px; }
         .lang-btn:hover { color: #fff; border-color: #ff0000; }
 
-        /* ТАЙМЕР */
         .timer-container {
             margin-top: 20px;
             z-index: 25; display: flex; align-items: center; justify-content: center;
@@ -187,127 +174,112 @@
 </head>
 <body>
 
-    <div class="top-bar">
-        <div class="top-left">
-            <div class="top-logo"><img src="Logo_TCK.png" alt="Logo"></div> 
-            <div class="top-nickname">TCK Team</div>
-        </div>
-        <div class="top-stats">
-            <div class="stat-item"><span class="stat-value2">?</span><span class="stat-label" data-lang="statWins">Wins</span></div>
-            <div class="stat-item"><span class="stat-value1">?</span><span class="stat-label" data-lang="statLosses">Losses</span></div>
-            <div class="stat-item"><span class="stat-value">?</span><span class="stat-label" data-lang="statMatches">Matches</span></div>
-        </div>
+<div class="top-bar">
+    <div class="top-left">
+        <div class="top-logo"><img src="Logo_TCK.png" alt="Logo"></div>
+        <div class="top-nickname">TCK Team</div>
     </div>
-
-    <img src="Cs.jpg" class="bg-image" alt="Background">
-
-    <div class="lang-switch">
-        <button class="lang-btn" onclick="changeLang('en')">EN</button>
-        <button class="lang-btn" onclick="changeLang('ua')">UA</button>
-        <button class="lang-btn" onclick="changeLang('ru')">RU</button>
+    <div class="top-stats">
+        <div class="stat-item"><span class="stat-value2">?</span><span class="stat-label" data-lang="statWins">Wins</span></div>
+        <div class="stat-item"><span class="stat-value1">?</span><span class="stat-label" data-lang="statLosses">Losses</span></div>
+        <div class="stat-item"><span class="stat-value">?</span><span class="stat-label" data-lang="statMatches">Matches</span></div>
     </div>
+</div>
 
-    <div class="content">
-        <h1 class="main-title">
-			<span class="sub-text" data-lang="minitext">Ukrainian Esports · 2026</span>
-		
-            <span class="teks1" data-lang="titlePart1">TCK</span>
-            <span class="highlight" data-lang="titlePart2">Team</span>
-        </h1>
-        <div class="gif-container" onmouseenter="this.querySelector('img').src='https://media.tenor.com/gmbMn1iUZxgAAAAi/cat-%D0%BA%D0%BE%D1%82.gif'" onmouseleave="this.querySelector('img').src='cat_static.png'">
-            <img src="cat_static.png" alt="Cat">
-        </div>
-        <div class="timer-container">
-            <div class="timer-display" id="timerDisplay">Стрим: 00:00:00:00</div>
-        </div>
+<img src="Cs.jpg" class="bg-image" alt="Background">
+
+<div class="lang-switch">
+    <button class="lang-btn" onclick="changeLang('en')">EN</button>
+    <button class="lang-btn" onclick="changeLang('ua')">UA</button>
+    <button class="lang-btn" onclick="changeLang('ru')">RU</button>
+</div>
+
+<div class="content">
+    <h1 class="main-title">
+        <span class="sub-text" data-lang="minitext">Ukrainian Esports · 2026</span>
+
+        <span class="teks1" data-lang="titlePart1">TCK</span>
+        <span class="highlight" data-lang="titlePart2">Team</span>
+    </h1>
+    <div class="gif-container" onmouseenter="this.querySelector('img').src='https://media.tenor.com/gmbMn1iUZxgAAAAi/cat-%D0%BA%D0%BE%D1%82.gif'" onmouseleave="this.querySelector('img').src='cat_static.png'">
+        <img src="cat_static.png" alt="Cat">
     </div>
-
-    <div class="marquee-container">
-        <marquee scrollamount="25" data-lang="runningText">Loading information...</marquee>
+    <div class="timer-container">
+        <div class="timer-display" id="timerDisplay">Стрим: 00:00:00:00</div>
     </div>
+</div>
 
-    <nav class="bottom-nav">
-        <button class="nav-item" onclick="window.location.href='teams'" data-lang="menuSostav">Составы</button>
-        <button class="nav-item" onclick="window.location.href='matches'" data-lang="menuMatches">Матчи</button>
-        <button class="nav-item" onclick="window.location.href='social'" data-lang="menuSocial">Соцсети</button>
-		<button class="nav-item" onclick="window.location.href='thank'" data-lang="menuthank">Спасибо за помощь</button>
-    </nav>
+<div class="marquee-container">
+    <marquee scrollamount="25" data-lang="runningText">Loading information...</marquee>
+</div>
 
-    <script>
-        // ============================================
-        // НАСТРОЙКИ ТАЙМЕРА (измените здесь)
-        // ============================================
-        // Показывать таймер? (true = показать, false = скрыть)
-        var TIMER_VISIBLE = false;
-        
-        // Формат: "2026-04-25T20:00" (год-месяц-деньTчас:минута)
-        // Пример: "2026-04-25T20:00" = 25 апреля 2026 в 20:00
-        // Оставьте пустым "" чтобы не устанавливать дату через код
-        var TIMER_TARGET_DATE = "";
-        
-        // Автоматически запустить таймер при загрузке? (true/false)
-        var TIMER_AUTO_START = false;
-        // ============================================
+<nav class="bottom-nav">
+    <button class="nav-item" onclick="window.location.href='teams'" data-lang="menuSostav">Составы</button>
+    <button class="nav-item" onclick="window.location.href='matches'" data-lang="menuMatches">Матчи</button>
+    <button class="nav-item" onclick="window.location.href='social'" data-lang="menuSocial">Соцсети</button>
+    <button class="nav-item" onclick="window.location.href='thank'" data-lang="menuthank">Спасибо за помощь</button>
+</nav>
 
-        function changeLang(lang) {
-            localStorage.setItem('preferredLang', lang);
-            if (typeof updateLanguage === 'function') { updateLanguage(); }
-            document.documentElement.lang = lang;
-        }
-        window.onload = function() {
-            let savedLang = localStorage.getItem('preferredLang') || 'en';
-            changeLang(savedLang);
-            
-            // Показать/скрыть таймер
-            const timerContainer = document.querySelector('.timer-container');
-            if (TIMER_VISIBLE) {
-                timerContainer.style.display = 'flex';
-                // Запуск таймера если дата установлена в коде
-                if (TIMER_TARGET_DATE) {
-                    targetDate = new Date(TIMER_TARGET_DATE);
-                    localStorage.setItem('timerHasDate', 'true');
-                    startTimer();
-                } else {
-                    localStorage.setItem('timerHasDate', 'false');
-                }
+<script>
+    var TIMER_VISIBLE = false;
+    var TIMER_TARGET_DATE = "";
+    var TIMER_AUTO_START = false;
+
+    function changeLang(lang) {
+        localStorage.setItem('preferredLang', lang);
+        if (typeof updateLanguage === 'function') { updateLanguage(); }
+        document.documentElement.lang = lang;
+    }
+    window.onload = function() {
+        let savedLang = localStorage.getItem('preferredLang') || 'en';
+        changeLang(savedLang);
+
+        const timerContainer = document.querySelector('.timer-container');
+        if (TIMER_VISIBLE) {
+            timerContainer.style.display = 'flex';
+            if (TIMER_TARGET_DATE) {
+                targetDate = new Date(TIMER_TARGET_DATE);
+                localStorage.setItem('timerHasDate', 'true');
+                startTimer();
             } else {
-                timerContainer.style.display = 'none';
                 localStorage.setItem('timerHasDate', 'false');
             }
-        };
-
-        let timerInterval = null;
-        let targetDate = null;
-
-        function startTimer() {
-            if (timerInterval) clearInterval(timerInterval);
-            
-            timerInterval = setInterval(function() {
-                const now = new Date().getTime();
-                const distance = targetDate - now;
-                
-                if (distance < 0) {
-                    // Таймер закончился
-                    clearInterval(timerInterval);
-                    const display = document.getElementById('timerDisplay');
-                    display.innerHTML = '<span class="live-text">LIVE</span>';
-                    localStorage.setItem('timerFinished', 'true');
-                } else {
-                    // Обратный отсчет
-                    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-                    
-                    document.getElementById('timerDisplay').textContent = 
-                        String(days).padStart(2, '0') + ':' +
-                        String(hours).padStart(2, '0') + ':' +
-                        String(minutes).padStart(2, '0') + ':' +
-                        String(seconds).padStart(2, '0');
-                    localStorage.setItem('timerFinished', 'false');
-                }
-            }, 1000);
+        } else {
+            timerContainer.style.display = 'none';
+            localStorage.setItem('timerHasDate', 'false');
         }
-    </script>
+    };
+
+    let timerInterval = null;
+    let targetDate = null;
+
+    function startTimer() {
+        if (timerInterval) clearInterval(timerInterval);
+
+        timerInterval = setInterval(function() {
+            const now = new Date().getTime();
+            const distance = targetDate - now;
+
+            if (distance < 0) {
+                clearInterval(timerInterval);
+                const display = document.getElementById('timerDisplay');
+                display.innerHTML = '<span class="live-text">LIVE</span>';
+                localStorage.setItem('timerFinished', 'true');
+            } else {
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                document.getElementById('timerDisplay').textContent =
+                    String(days).padStart(2, '0') + ':' +
+                    String(hours).padStart(2, '0') + ':' +
+                    String(minutes).padStart(2, '0') + ':' +
+                    String(seconds).padStart(2, '0');
+                localStorage.setItem('timerFinished', 'false');
+            }
+        }, 1000);
+    }
+</script>
 </body>
 </html>
